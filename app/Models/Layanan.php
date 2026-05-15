@@ -2,20 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Model: Layanan
+ * Tabel: layanan — jasa/layanan yang ditawarkan
+ */
 class Layanan extends Model
 {
-    use HasFactory;
-
     protected $table = 'layanan';
 
     protected $fillable = [
-        'nama_layanan', 
-        'ikon', 
-        'deskripsi_singkat', 
-        'detail_layanan', 
-        'gambar'
+        'nama',
+        'slug',
+        'deskripsi',
+        'icon',
+        'urutan',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'urutan' => 'integer',
+        ];
+    }
+
+    /**
+     * Scope: urutkan berdasarkan kolom urutan
+     */
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('urutan', 'asc');
+    }
 }

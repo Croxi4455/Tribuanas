@@ -2,18 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Model: Mitra
+ * Tabel: mitra — perusahaan/instansi mitra
+ */
 class Mitra extends Model
 {
-    use HasFactory;
-
     protected $table = 'mitra';
 
     protected $fillable = [
-        'nama_perusahaan', 
-        'logo', 
-        'url_website'
+        'nama',
+        'logo',
+        'kota',
+        'tahun',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'tahun' => 'integer',
+        ];
+    }
 }
