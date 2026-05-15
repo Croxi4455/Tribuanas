@@ -1,3 +1,4 @@
+import React from 'react';
 import { Head } from '@inertiajs/react';
 import { Calendar, ArrowUpRight } from 'lucide-react';
 import CompanyLayout from '@/layouts/company-layout';
@@ -8,6 +9,7 @@ type Berita = {
     slug: string;
     isi: string;
     gambar: string | null;
+    gambar_url: string | null; // Tambahkan field ini
     tanggal_publish: string;
     is_published: boolean;
 };
@@ -17,20 +19,21 @@ type Props = {
     berita: Berita[];
 };
 
-const DUMMY: Berita[] = [
-    { id: 1, judul: 'Tribuana Raih Penghargaan Perusahaan Keamanan Terbaik 2025', slug: 'penghargaan-2025', isi: 'PT Tribuana berhasil meraih penghargaan bergengsi sebagai perusahaan jasa keamanan terbaik dalam ajang Indonesia Security Awards 2025 yang diselenggarakan di Jakarta Convention Center. Penghargaan ini merupakan bukti nyata komitmen kami dalam memberikan layanan keamanan berkualitas tinggi.', gambar: null, tanggal_publish: '2025-11-10', is_published: true },
-    { id: 2, judul: 'Peluncuran Program Pelatihan Gada Utama Angkatan ke-12', slug: 'pelatihan-gada-utama-12', isi: 'Tribuana resmi membuka pendaftaran Program Pelatihan Gada Utama Angkatan ke-12. Program ini dirancang untuk mencetak manajer keamanan profesional bersertifikat Polri dengan kurikulum yang telah diperbarui sesuai standar terkini.', gambar: null, tanggal_publish: '2025-10-22', is_published: true },
-    { id: 3, judul: 'Kerjasama Strategis dengan 5 BUMN Baru di Kuartal IV 2025', slug: 'kerjasama-bumn-q4', isi: 'Tribuana menandatangani perjanjian kerjasama dengan lima Badan Usaha Milik Negara baru, memperluas jangkauan layanan keamanan ke sektor energi dan infrastruktur nasional. Penandatanganan dilakukan di Kantor Pusat Tribuana, Jakarta.', gambar: null, tanggal_publish: '2025-09-15', is_published: true },
-    { id: 4, judul: 'Tribuana Perkuat Sistem Pengamanan Digital dengan Teknologi AI', slug: 'teknologi-ai-keamanan', isi: 'Dalam rangka meningkatkan kualitas layanan, Tribuana mengintegrasikan teknologi kecerdasan buatan dalam sistem monitoring keamanan. Inovasi ini memungkinkan deteksi ancaman lebih cepat dan akurat.', gambar: null, tanggal_publish: '2025-08-05', is_published: true },
-    { id: 5, judul: 'Sertifikasi ISO 9001:2015 Berhasil Dipertahankan', slug: 'sertifikasi-iso-2025', isi: 'Tribuana kembali berhasil mempertahankan sertifikasi ISO 9001:2015 untuk sistem manajemen mutu. Audit dilakukan oleh lembaga sertifikasi internasional dan Tribuana mendapat nilai tertinggi dalam kategori layanan keamanan.', gambar: null, tanggal_publish: '2025-07-20', is_published: true },
-    { id: 6, judul: 'Pelatihan Tanggap Darurat Bencana untuk 200 Personel', slug: 'pelatihan-tanggap-darurat', isi: 'Sebanyak 200 personel Tribuana mengikuti pelatihan tanggap darurat bencana yang diselenggarakan bekerja sama dengan BNPB. Pelatihan ini bertujuan meningkatkan kesiapsiagaan personel dalam menghadapi situasi darurat.', gambar: null, tanggal_publish: '2025-06-12', is_published: true },
-];
-
-export default function BeritaPage({ profil, berita }: Props) {
-    const data = berita.length > 0 ? berita : DUMMY;
+export default function BeritaPage({ profil, berita = [] }: Props) {
+    // 1. Prioritaskan data dari database, jangan pakai DUMMY kalau sudah ada data
+    const data = berita;
 
     const formatDate = (d: string) =>
         new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    // Handle jika berita kosong agar tidak error saat destructuring
+    if (data.length === 0) {
+        return (
+            <CompanyLayout profil={profil} title="Berita & Kegiatan" subtitle="Berita" image="https://picsum.photos/1920/600?grayscale">
+                <div className="py-20 text-center text-white/50">Belum ada berita yang diterbitkan.</div>
+            </CompanyLayout>
+        );
+    }
 
     const [featured, ...rest] = data;
 
@@ -47,9 +50,10 @@ export default function BeritaPage({ profil, berita }: Props) {
                             <article className="group mb-8 overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] transition-all hover:border-[#C9A84C]/20 lg:flex">
                                 <div className="relative aspect-video shrink-0 overflow-hidden bg-[#0D1B2A] lg:aspect-auto lg:w-2/5">
                                     <img
-                                        src={featured.gambar || `https://picsum.photos/800/500?grayscale&blur=1&random=${featured.id}`}
+                                        // FIX: Gunakan gambar_url dari controller, fallback ke picsum hanya jika keduanya kosong
+                                        src={featured.gambar_url || (featured.gambar ? `/storage/${featured.gambar}` : `https://picsum.photos/800/500?grayscale&random=${featured.id}`)}
                                         alt={featured.judul}
-                                        className="h-full w-full object-cover opacity-40 transition-all duration-500 group-hover:scale-105 group-hover:opacity-55"
+                                        className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
                                     />
                                     <div className="absolute inset-0 bg-linear-to-r from-transparent to-[#0D1B2A]/60" />
                                     <div className="absolute left-4 top-4 rounded-full bg-[#C9A84C] px-3 py-1 text-[10px] font-black tracking-widest text-[#0D1B2A] uppercase">
@@ -84,9 +88,10 @@ export default function BeritaPage({ profil, berita }: Props) {
                                 >
                                     <div className="relative aspect-video overflow-hidden bg-[#0D1B2A]">
                                         <img
-                                            src={item.gambar || `https://picsum.photos/600/340?grayscale&blur=1&random=${item.id}`}
+                                            // FIX: Gunakan gambar_url dari controller
+                                            src={item.gambar_url || (item.gambar ? `/storage/${item.gambar}` : `https://picsum.photos/600/340?grayscale&random=${item.id}`)}
                                             alt={item.judul}
-                                            className="h-full w-full object-cover opacity-40 transition-all duration-500 group-hover:scale-105 group-hover:opacity-55"
+                                            className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
                                         />
                                         <div className="absolute inset-0 bg-linear-to-t from-[#0D1B2A]/80 to-transparent" />
                                     </div>

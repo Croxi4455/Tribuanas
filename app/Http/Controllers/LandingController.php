@@ -72,13 +72,24 @@ class LandingController extends Controller
 
     /** Halaman Berita */
     public function berita()
-    {
-        return Inertia::render('berita', [
-            'profil'  => $this->profil(),
-            'berita'  => Berita::published()->orderByDesc('tanggal_publish')->get(),
-        ]);
-    }
+{
+    // Kita harus "bungkus" datanya supaya nama file jadi URL Gambar lengkap
+    $berita = Berita::published()
+        ->orderByDesc('tanggal_publish')
+        ->get()
+        ->map(function ($item) {
+            // Ini bagian paling penting:
+            $item->gambar_url = $item->gambar 
+                ? asset('storage/' . $item->gambar) 
+                : null;
+            return $item;
+        });
 
+    return Inertia::render('berita', [
+        'profil' => $this->profil(),
+        'berita' => $berita, // Kirim variabel yang sudah di-map tadi
+    ]);
+}
     /** Halaman Kontak */
     public function kontak()
     {
