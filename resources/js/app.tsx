@@ -11,9 +11,11 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     layout: (name) => {
+        // Company profile pages manage their own layout (Navbar + Footer)
+        const publicPages = ['welcome', 'layanan', 'pelatihan', 'mitra', 'galeri', 'berita', 'kontak'];
+        if (publicPages.includes(name)) return null;
+
         switch (true) {
-            case name === 'welcome':
-                return null;
             case name.startsWith('auth/'):
                 return AuthLayout;
             case name.startsWith('settings/'):

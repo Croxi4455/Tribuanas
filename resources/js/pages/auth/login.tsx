@@ -7,7 +7,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
-import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 
@@ -84,7 +83,7 @@ export default function Login({
 
                             <Button
                                 type="submit"
-                                className="mt-4 w-full"
+                                className="mt-4 w-full bg-linear-to-r from-[#C9A84C] to-[#B8973F] text-[#0D1B2A] font-bold tracking-widest uppercase hover:shadow-lg hover:shadow-[#C9A84C]/20 active:scale-95"
                                 tabIndex={4}
                                 disabled={processing}
                                 data-test="login-button"
@@ -94,14 +93,8 @@ export default function Login({
                             </Button>
                         </div>
 
-                        {canRegister && (
-                            <div className="text-center text-sm text-muted-foreground">
-                                Don't have an account?{' '}
-                                <TextLink href={register()} tabIndex={5}>
-                                    Sign up
-                                </TextLink>
-                            </div>
-                        )}
+                        {canRegister && null}
+
                     </>
                 )}
             </Form>
