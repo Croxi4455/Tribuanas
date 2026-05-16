@@ -23,7 +23,7 @@ export default function CompanyLayout({ profil, children, title, subtitle, image
     const bgImage = image ?? 'https://picsum.photos/1920/600?grayscale&random=20';
 
     return (
-        <div className="min-h-screen bg-[#0A0A0A]" style={{ fontFamily: "'Inter', sans-serif" }}>
+        <div className="min-h-screen bg-[#111111]" style={{ fontFamily: "'Inter', sans-serif" }}>
             <Navbar />
 
             {/* ── Page Hero Banner ── */}
@@ -37,8 +37,8 @@ export default function CompanyLayout({ profil, children, title, subtitle, image
                         className="h-full w-full object-cover object-center"
                     />
                     {/* Dark overlay */}
-                    <div className="absolute inset-0 bg-[#0D1B2A]/80" />
-                    <div className="absolute inset-0 bg-linear-to-r from-[#0D1B2A]/70 via-[#0D1B2A]/40 to-transparent" />
+                    <div className="absolute inset-0 bg-[#181819]/80" />
+                    <div className="absolute inset-0 bg-linear-to-r from-[#181819]/70 via-[#181819]/40 to-transparent" />
                     {/* Gold tint */}
                     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(201,168,76,0.07)_0%,_transparent_60%)]" />
                 </div>
@@ -56,14 +56,14 @@ export default function CompanyLayout({ profil, children, title, subtitle, image
                 <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
                     {/* Breadcrumb */}
                     <div className="mb-5 flex items-center gap-2 text-xs text-white/35">
-                        <a href="/" className="transition-colors hover:text-[#C9A84C]">Beranda</a>
+                        <a href="/" className="transition-colors hover:text-[#F5B800]">Beranda</a>
                         <span className="text-white/20">/</span>
-                        <span className="text-[#C9A84C]">{subtitle || title}</span>
+                        <span className="text-[#F5B800]">{subtitle || title}</span>
                     </div>
 
                     <div className="mb-3 flex items-center gap-3">
-                        <div className="h-px w-10 bg-[#C9A84C]" />
-                        <span className="text-xs font-bold tracking-[0.3em] text-[#C9A84C] uppercase">
+                        <div className="h-px w-10 bg-[#F5B800]" />
+                        <span className="text-xs font-bold tracking-[0.3em] text-[#F5B800] uppercase">
                             {subtitle || title}
                         </span>
                     </div>
@@ -74,7 +74,7 @@ export default function CompanyLayout({ profil, children, title, subtitle, image
                 </div>
 
                 {/* Bottom fade into page bg */}
-                <div className="absolute bottom-0 left-0 right-0 h-16 bg-linear-to-t from-[#0A0A0A] to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 h-16 bg-linear-to-t from-[#111111] to-transparent" />
             </div>
 
             {/* Page Content */}

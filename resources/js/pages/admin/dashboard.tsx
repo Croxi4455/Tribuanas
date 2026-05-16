@@ -43,28 +43,28 @@ function StatCard({ label, value, icon: Icon, trend }: {
     label: string; value: number; icon: LucideIcon; trend?: string;
 }) {
     return (
-        <div className="group relative overflow-hidden rounded-xl border border-white/6 bg-white/3 p-6 transition-all duration-300 hover:border-[#C9A84C]/25 hover:bg-white/5">
+        <div className="group relative overflow-hidden rounded-xl border border-white/6 bg-white/3 p-6 transition-all duration-300 hover:border-[#F5B800]/25 hover:bg-white/5">
             {/* Gold left accent */}
-            <div className="absolute left-0 top-0 h-full w-[3px] bg-linear-to-b from-[#C9A84C]/0 via-[#C9A84C]/50 to-[#C9A84C]/0 opacity-0 transition-opacity group-hover:opacity-100" />
+            <div className="absolute left-0 top-0 h-full w-[3px] bg-linear-to-b from-[#F5B800]/0 via-[#F5B800]/50 to-[#F5B800]/0 opacity-0 transition-opacity group-hover:opacity-100" />
 
             <div className="flex items-start justify-between">
                 <div>
                     <p className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase">{label}</p>
                     <p className="mt-2 text-4xl font-black text-white">{value}</p>
                     {trend && (
-                        <div className="mt-2 flex items-center gap-1 text-xs text-[#C9A84C]/70">
+                        <div className="mt-2 flex items-center gap-1 text-xs text-[#F5B800]/70">
                             <TrendingUp className="h-3 w-3" />
                             <span>{trend}</span>
                         </div>
                     )}
                 </div>
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#C9A84C]/20 bg-[#C9A84C]/8 transition-colors group-hover:border-[#C9A84C]/35 group-hover:bg-[#C9A84C]/15">
-                    <Icon className="h-5 w-5 text-[#C9A84C]" />
+                <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#F5B800]/20 bg-[#F5B800]/8 transition-colors group-hover:border-[#F5B800]/35 group-hover:bg-[#F5B800]/15">
+                    <Icon className="h-5 w-5 text-[#F5B800]" />
                 </div>
             </div>
 
             {/* Bottom line */}
-            <div className="absolute bottom-0 left-0 h-px w-full bg-linear-to-r from-transparent via-[#C9A84C]/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+            <div className="absolute bottom-0 left-0 h-px w-full bg-linear-to-r from-transparent via-[#F5B800]/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
         </div>
     );
 }
@@ -73,7 +73,7 @@ function AlertCard({ label, value, icon: Icon, variant }: {
     label: string; value: number; icon: LucideIcon; variant: 'gold' | 'green' | 'muted';
 }) {
     const styles = {
-        gold:  { wrap: 'border-[#C9A84C]/20 bg-[#C9A84C]/5',  icon: 'border-[#C9A84C]/25 bg-[#C9A84C]/10 text-[#C9A84C]',  val: 'text-[#C9A84C]' },
+        gold:  { wrap: 'border-[#F5B800]/20 bg-[#F5B800]/5',  icon: 'border-[#F5B800]/25 bg-[#F5B800]/10 text-[#F5B800]',  val: 'text-[#F5B800]' },
         green: { wrap: 'border-emerald-500/15 bg-emerald-500/5', icon: 'border-emerald-500/20 bg-emerald-500/10 text-emerald-400', val: 'text-emerald-400' },
         muted: { wrap: 'border-white/6 bg-white/3',             icon: 'border-white/10 bg-white/5 text-white/50',             val: 'text-white' },
     };
@@ -109,8 +109,8 @@ export default function AdminDashboard({ stats, berita_terbaru, kontak_terbaru }
                 <div className="flex items-end justify-between">
                     <div>
                         <div className="mb-2 flex items-center gap-3">
-                            <div className="h-px w-8 bg-[#C9A84C]" />
-                            <span className="text-[10px] font-bold tracking-[0.3em] text-[#C9A84C]/70 uppercase">Admin Panel</span>
+                            <div className="h-px w-8 bg-[#F5B800]" />
+                            <span className="text-[10px] font-bold tracking-[0.3em] text-[#F5B800]/70 uppercase">Admin Panel</span>
                         </div>
                         <h1 className="text-3xl font-black tracking-tight text-white uppercase">Dashboard</h1>
                         <p className="mt-1 text-sm text-white/40">Selamat datang kembali di panel admin Tribuana Security</p>
@@ -122,7 +122,7 @@ export default function AdminDashboard({ stats, berita_terbaru, kontak_terbaru }
                 </div>
 
                 {/* ── Divider ── */}
-                <div className="h-px bg-linear-to-r from-[#C9A84C]/30 via-[#C9A84C]/10 to-transparent" />
+                <div className="h-px bg-linear-to-r from-[#F5B800]/30 via-[#F5B800]/10 to-transparent" />
 
                 {/* ── Main Stat Cards ── */}
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -142,8 +142,8 @@ export default function AdminDashboard({ stats, berita_terbaru, kontak_terbaru }
                     {/* Berita Terbaru */}
                     <div className="overflow-hidden rounded-xl border border-white/6 bg-white/3">
                         <div className="flex items-center gap-3 border-b border-white/6 px-6 py-4">
-                            <div className="flex h-7 w-7 items-center justify-center rounded-md border border-[#C9A84C]/20 bg-[#C9A84C]/10">
-                                <Newspaper className="h-3.5 w-3.5 text-[#C9A84C]" />
+                            <div className="flex h-7 w-7 items-center justify-center rounded-md border border-[#F5B800]/20 bg-[#F5B800]/10">
+                                <Newspaper className="h-3.5 w-3.5 text-[#F5B800]" />
                             </div>
                             <h3 className="text-sm font-black tracking-wide text-white uppercase">Berita Terbaru</h3>
                         </div>
@@ -170,12 +170,12 @@ export default function AdminDashboard({ stats, berita_terbaru, kontak_terbaru }
                     {/* Kontak Masuk */}
                     <div className="overflow-hidden rounded-xl border border-white/6 bg-white/3">
                         <div className="flex items-center gap-3 border-b border-white/6 px-6 py-4">
-                            <div className="flex h-7 w-7 items-center justify-center rounded-md border border-[#C9A84C]/20 bg-[#C9A84C]/10">
-                                <Mail className="h-3.5 w-3.5 text-[#C9A84C]" />
+                            <div className="flex h-7 w-7 items-center justify-center rounded-md border border-[#F5B800]/20 bg-[#F5B800]/10">
+                                <Mail className="h-3.5 w-3.5 text-[#F5B800]" />
                             </div>
                             <h3 className="text-sm font-black tracking-wide text-white uppercase">Kontak Masuk</h3>
                             {stats.kontak_belum_dibaca > 0 && (
-                                <span className="ml-auto rounded-full bg-[#C9A84C] px-2 py-0.5 text-[10px] font-black text-[#0D1B2A]">
+                                <span className="ml-auto rounded-full bg-[#F5B800] px-2 py-0.5 text-[10px] font-black text-[#181819]">
                                     {stats.kontak_belum_dibaca} baru
                                 </span>
                             )}
@@ -195,7 +195,7 @@ export default function AdminDashboard({ stats, berita_terbaru, kontak_terbaru }
                                     <span className={`ml-4 shrink-0 rounded border px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase ${
                                         item.is_read
                                             ? 'border-white/8 bg-white/4 text-white/30'
-                                            : 'border-[#C9A84C]/25 bg-[#C9A84C]/10 text-[#C9A84C]'
+                                            : 'border-[#F5B800]/25 bg-[#F5B800]/10 text-[#F5B800]'
                                     }`}>
                                         {item.is_read ? 'Dibaca' : 'Baru'}
                                     </span>

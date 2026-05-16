@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from '@inertiajs/react';
 import { Shield, Eye, UserCheck, Car, Camera, Lock, Siren, ShieldCheck, ArrowUpRight } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -75,10 +76,10 @@ export default function ServicesSection({ layanan }: Props) {
     }, []);
 
     return (
-        <section id="layanan" ref={sectionRef} className="relative overflow-hidden bg-[#111827] py-28 lg:py-36">
+        <section id="layanan" ref={sectionRef} className="relative overflow-hidden bg-[#1C1C1E] py-28 lg:py-36">
 
             {/* Angled top cut */}
-            <div className="absolute left-0 right-0 top-0 h-16 bg-[#0A0A0A]"
+            <div className="absolute left-0 right-0 top-0 h-16 bg-[#111111]"
                 style={{ clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 100%)' }}
             />
 
@@ -98,13 +99,13 @@ export default function ServicesSection({ layanan }: Props) {
                 <div className={`mb-20 flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                     <div>
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="h-px w-12 bg-[#C9A84C]" />
-                            <span className="text-xs font-bold tracking-[0.3em] text-[#C9A84C] uppercase">Layanan Unggulan</span>
+                            <div className="h-px w-12 bg-[#F5B800]" />
+                            <span className="text-xs font-bold tracking-[0.3em] text-[#F5B800] uppercase">Layanan Unggulan</span>
                         </div>
                         <h2 className="text-4xl font-black leading-tight tracking-tight text-white lg:text-6xl uppercase">
                             Solusi Keamanan
                             <br />
-                            <span className="text-[#C9A84C]">Terpadu</span>
+                            <span className="text-[#F5B800]">Terpadu</span>
                         </h2>
                     </div>
                     <p className="max-w-sm text-base text-white/50 lg:text-right">
@@ -132,7 +133,7 @@ export default function ServicesSection({ layanan }: Props) {
                 <div className={`mt-16 text-center transition-all duration-700 delay-500 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
                     <button
                         onClick={() => document.getElementById('kontak')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="group inline-flex items-center gap-2 rounded-lg border border-[#C9A84C]/30 px-8 py-3.5 text-sm font-bold tracking-widest text-[#C9A84C] uppercase transition-all hover:border-[#C9A84C] hover:bg-[#C9A84C]/10 active:scale-95"
+                        className="group inline-flex items-center gap-2 rounded-lg border border-[#F5B800]/30 px-8 py-3.5 text-sm font-bold tracking-widest text-[#F5B800] uppercase transition-all hover:border-[#F5B800] hover:bg-[#F5B800]/10 active:scale-95"
                     >
                         Konsultasikan Kebutuhan Anda
                         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -141,7 +142,7 @@ export default function ServicesSection({ layanan }: Props) {
             </div>
 
             {/* Angled bottom cut */}
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-[#0A0A0A]"
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-[#111111]"
                 style={{ clipPath: 'polygon(0 100%, 100% 0, 100% 100%)' }}
             />
         </section>
@@ -160,22 +161,23 @@ function ServiceCard({
     delay: number;
 }) {
     return (
-        <div
-            className={`group relative overflow-hidden rounded-xl border border-white/6 bg-white/2 transition-all duration-500 hover:border-[#C9A84C]/25 hover:bg-white/4 ${
+        <Link
+            href={`/layanan/${item.slug}`}
+            className={`group relative overflow-hidden rounded-xl border border-white/6 bg-white/2 transition-all duration-500 hover:border-[#F5B800]/25 hover:bg-white/4 ${
                 visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
             }`}
             style={{ transitionDelay: `${200 + delay}ms` }}
         >
             {/* Gold left accent bar */}
-            <div className="absolute left-0 top-0 h-full w-[3px] bg-linear-to-b from-[#C9A84C]/0 via-[#C9A84C]/60 to-[#C9A84C]/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="absolute left-0 top-0 h-full w-[3px] bg-linear-to-b from-[#F5B800]/0 via-[#F5B800]/60 to-[#F5B800]/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
             <div className="p-7">
                 {/* Top row: icon + number */}
                 <div className="mb-5 flex items-start justify-between">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#C9A84C]/20 bg-[#C9A84C]/8 transition-colors group-hover:border-[#C9A84C]/35 group-hover:bg-[#C9A84C]/12">
-                        <Icon className="h-5 w-5 text-[#C9A84C]" />
+                    <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#F5B800]/20 bg-[#F5B800]/8 transition-colors group-hover:border-[#F5B800]/35 group-hover:bg-[#F5B800]/12">
+                        <Icon className="h-5 w-5 text-[#F5B800]" />
                     </div>
-                    <span className="font-black text-[#C9A84C]/12 text-5xl leading-none select-none group-hover:text-[#C9A84C]/20 transition-colors">
+                    <span className="font-black text-[#F5B800]/12 text-5xl leading-none select-none group-hover:text-[#F5B800]/20 transition-colors">
                         {String(item.urutan).padStart(2, '0')}
                     </span>
                 </div>
@@ -186,7 +188,7 @@ function ServiceCard({
                 </h3>
 
                 {/* Divider */}
-                <div className="mb-4 h-px w-8 bg-[#C9A84C]/40" />
+                <div className="mb-4 h-px w-8 bg-[#F5B800]/40" />
 
                 {/* Description */}
                 <p className="line-clamp-3 text-sm leading-relaxed text-white/40">
@@ -196,12 +198,12 @@ function ServiceCard({
 
             {/* Footer */}
             <div className="flex items-center justify-between border-t border-white/5 px-7 py-4">
-                <div className="flex items-center gap-1.5 text-[10px] font-black tracking-[0.15em] text-white/20 uppercase transition-colors group-hover:text-[#C9A84C]/60">
+                <div className="flex items-center gap-1.5 text-[10px] font-black tracking-[0.15em] text-white/20 uppercase transition-colors group-hover:text-[#F5B800]/60">
                     <ArrowUpRight className="h-3 w-3" />
                     Selengkapnya
                 </div>
-                <div className="h-1.5 w-1.5 rounded-full bg-[#C9A84C]/20 group-hover:bg-[#C9A84C]/50 transition-colors" />
+                <div className="h-1.5 w-1.5 rounded-full bg-[#F5B800]/20 group-hover:bg-[#F5B800]/50 transition-colors" />
             </div>
-        </div>
+        </Link>
     );
 }

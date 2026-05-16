@@ -4,9 +4,9 @@ import type { BreadcrumbItem as BreadcrumbItemType } from '@/types';
 
 export function AppSidebarHeader({ breadcrumbs = [] }: { breadcrumbs?: BreadcrumbItemType[] }) {
     return (
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b border-white/6 bg-[#0A1628] px-6 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 md:px-4">
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b border-white/6 bg-[#181819] px-6 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 md:px-4">
             <div className="flex items-center gap-2">
-                <SidebarTrigger className="-ml-1 text-white/40 hover:text-[#C9A84C]" />
+                <SidebarTrigger className="-ml-1 text-white/40 hover:text-[#F5B800]" />
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
             </div>
         </header>

@@ -63,10 +63,10 @@ export default function NewsSection({ berita }: Props) {
         new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
     return (
-        <section id="berita" ref={sectionRef} className="relative overflow-hidden bg-[#111827] py-28 lg:py-36">
+        <section id="berita" ref={sectionRef} className="relative overflow-hidden bg-[#1C1C1E] py-28 lg:py-36">
 
             {/* Angled top */}
-            <div className="absolute left-0 right-0 top-0 h-16 bg-[#0A0A0A]"
+            <div className="absolute left-0 right-0 top-0 h-16 bg-[#111111]"
                 style={{ clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 100%)' }}
             />
 
@@ -78,16 +78,16 @@ export default function NewsSection({ berita }: Props) {
                 <div className={`mb-16 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                     <div>
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="h-px w-12 bg-[#C9A84C]" />
-                            <span className="text-xs font-bold tracking-[0.3em] text-[#C9A84C] uppercase">Berita Terkini</span>
+                            <div className="h-px w-12 bg-[#F5B800]" />
+                            <span className="text-xs font-bold tracking-[0.3em] text-[#F5B800] uppercase">Berita Terkini</span>
                         </div>
                         <h2 className="text-4xl font-black leading-tight tracking-tight text-white lg:text-6xl uppercase">
                             Berita &
                             <br />
-                            <span className="text-[#C9A84C]">Kegiatan</span>
+                            <span className="text-[#F5B800]">Kegiatan</span>
                         </h2>
                     </div>
-                    <button className="group flex items-center gap-2 self-start rounded-lg border border-white/10 px-6 py-3 text-sm font-bold tracking-widest text-white/50 uppercase transition-all hover:border-[#C9A84C]/30 hover:text-[#C9A84C] lg:self-auto">
+                    <button className="group flex items-center gap-2 self-start rounded-lg border border-white/10 px-6 py-3 text-sm font-bold tracking-widest text-white/50 uppercase transition-all hover:border-[#F5B800]/30 hover:text-[#F5B800] lg:self-auto">
                         Lihat Semua
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </button>
@@ -109,7 +109,7 @@ export default function NewsSection({ berita }: Props) {
             </div>
 
             {/* Angled bottom */}
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-[#0A0A0A]"
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-[#111111]"
                 style={{ clipPath: 'polygon(0 100%, 100% 0, 100% 100%)' }}
             />
         </section>
@@ -133,29 +133,29 @@ function NewsCard({
 
     return (
         <article
-            className={`group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] transition-all duration-500 hover:-translate-y-1 hover:border-[#C9A84C]/20 hover:shadow-2xl hover:shadow-[#C9A84C]/8 ${
+            className={`group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] transition-all duration-500 hover:-translate-y-1 hover:border-[#F5B800]/20 hover:shadow-2xl hover:shadow-[#F5B800]/8 ${
                 visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
             }`}
             style={{ transitionDelay: `${200 + delay}ms` }}
         >
             {/* Image area */}
-            <div className="relative aspect-video overflow-hidden bg-[#0D1B2A]">
+            <div className="relative aspect-video overflow-hidden bg-[#181819]">
                 <img
                     src={item.gambar || `https://picsum.photos/600/340?grayscale&blur=1&random=${item.id}`}
                     alt={item.judul}
                     className="h-full w-full object-cover opacity-40 transition-all duration-500 group-hover:scale-105 group-hover:opacity-50"
                 />
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-linear-to-t from-[#0D1B2A] via-[#0D1B2A]/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#181819] via-[#181819]/40 to-transparent" />
 
                 {/* Date badge */}
-                <div className="absolute bottom-4 left-5 flex items-center gap-1.5 rounded-full border border-[#C9A84C]/20 bg-[#0D1B2A]/80 px-3 py-1.5 backdrop-blur-sm">
-                    <Calendar className="h-3 w-3 text-[#C9A84C]" />
-                    <span className="text-[10px] font-semibold text-[#C9A84C]">{formatDate(item.tanggal_publish)}</span>
+                <div className="absolute bottom-4 left-5 flex items-center gap-1.5 rounded-full border border-[#F5B800]/20 bg-[#181819]/80 px-3 py-1.5 backdrop-blur-sm">
+                    <Calendar className="h-3 w-3 text-[#F5B800]" />
+                    <span className="text-[10px] font-semibold text-[#F5B800]">{formatDate(item.tanggal_publish)}</span>
                 </div>
 
                 {featured && (
-                    <div className="absolute right-4 top-4 rounded-full bg-[#C9A84C] px-3 py-1 text-[10px] font-black tracking-widest text-[#0D1B2A] uppercase">
+                    <div className="absolute right-4 top-4 rounded-full bg-[#F5B800] px-3 py-1 text-[10px] font-black tracking-widest text-[#181819] uppercase">
                         Terbaru
                     </div>
                 )}
@@ -163,19 +163,19 @@ function NewsCard({
 
             {/* Content */}
             <div className="p-7">
-                <h3 className="mb-3 line-clamp-2 text-lg font-black leading-snug tracking-tight text-white transition-colors group-hover:text-[#C9A84C]">
+                <h3 className="mb-3 line-clamp-2 text-lg font-black leading-snug tracking-tight text-white transition-colors group-hover:text-[#F5B800]">
                     {item.judul}
                 </h3>
                 <p className="mb-6 line-clamp-2 text-sm leading-relaxed text-white/40">
                     {excerpt}...
                 </p>
-                <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-[#C9A84C]/50 uppercase transition-all group-hover:text-[#C9A84C]">
+                <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-[#F5B800]/50 uppercase transition-all group-hover:text-[#F5B800]">
                     Baca Selengkapnya
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </div>
             </div>
 
-            <div className="absolute bottom-0 left-0 h-px w-full bg-linear-to-r from-transparent via-[#C9A84C]/30 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+            <div className="absolute bottom-0 left-0 h-px w-full bg-linear-to-r from-transparent via-[#F5B800]/30 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
         </article>
     );
 }

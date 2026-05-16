@@ -90,6 +90,67 @@ class LandingController extends Controller
         'berita' => $berita, // Kirim variabel yang sudah di-map tadi
     ]);
 }
+    /** Halaman Berita Detail */
+    public function showBerita($slug)
+    {
+        $beritaItem = Berita::published()->where('slug', $slug)->firstOrFail();
+        $beritaItem->gambar_url = $beritaItem->gambar ? asset('storage/' . $beritaItem->gambar) : null;
+
+        $beritaLainnya = Berita::published()
+            ->where('id', '!=', $beritaItem->id)
+            ->orderByDesc('tanggal_publish')
+            ->take(3)
+            ->get()
+            ->map(function ($item) {
+                $item->gambar_url = $item->gambar ? asset('storage/' . $item->gambar) : null;
+                return $item;
+            });
+
+        return Inertia::render('berita-detail', [
+            'profil'        => $this->profil(),
+            'berita'        => $beritaItem,
+            'beritaLainnya' => $beritaLainnya,
+        ]);
+    }
+
+    /** Halaman Layanan Detail */
+    public function showLayanan($slug)
+    {
+        $layananItem = Layanan::where('slug', $slug)->firstOrFail();
+
+        $layananLainnya = Layanan::where('id', '!=', $layananItem->id)
+            ->ordered()
+            ->get();
+
+        return Inertia::render('layanan-detail', [
+            'profil'         => $this->profil(),
+            'layanan'        => $layananItem,
+            'layananLainnya' => $layananLainnya,
+        ]);
+    }
+
+    /** Halaman Pelatihan Detail */
+    public function showPelatihan($id)
+    {
+        $pelatihanItem = Pelatihan::active()->findOrFail($id);
+        $pelatihanItem->gambar_url = $pelatihanItem->gambar ? asset('storage/' . $pelatihanItem->gambar) : null;
+
+        $pelatihanLainnya = Pelatihan::active()
+            ->where('id', '!=', $pelatihanItem->id)
+            ->take(3)
+            ->get()
+            ->map(function ($item) {
+                $item->gambar_url = $item->gambar ? asset('storage/' . $item->gambar) : null;
+                return $item;
+            });
+
+        return Inertia::render('pelatihan-detail', [
+            'profil'            => $this->profil(),
+            'pelatihan'         => $pelatihanItem,
+            'pelatihanLainnya'  => $pelatihanLainnya,
+        ]);
+    }
+
     /** Halaman Kontak */
     public function kontak()
     {
