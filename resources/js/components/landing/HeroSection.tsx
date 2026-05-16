@@ -74,7 +74,7 @@ export default function HeroSection({ nama, tagline }: Props) {
     };
 
     return (
-        <section id="beranda" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#0D1B2A]">
+        <section id="beranda" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#181819]">
 
             {/* ── Background Image ── */}
             <div className="absolute inset-0">
@@ -83,8 +83,8 @@ export default function HeroSection({ nama, tagline }: Props) {
                     alt=""
                     className="h-full w-full object-cover object-center"
                 />
-                <div className="absolute inset-0 bg-[#0D1B2A]/75" />
-                <div className="absolute inset-0 bg-linear-to-br from-[#0D1B2A]/60 via-transparent to-[#060E1B]/80" />
+                <div className="absolute inset-0 bg-[#181819]/75" />
+                <div className="absolute inset-0 bg-linear-to-br from-[#181819]/60 via-transparent to-[#0E0E0F]/80" />
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(201,168,76,0.08)_0%,transparent_60%)]" />
             </div>
 
@@ -100,7 +100,7 @@ export default function HeroSection({ nama, tagline }: Props) {
             {/* Diagonal accent lines */}
             <div className="absolute inset-0 overflow-hidden opacity-[0.06]">
                 {[...Array(6)].map((_, i) => (
-                    <div key={i} className="absolute h-px bg-linear-to-r from-transparent via-[#C9A84C] to-transparent"
+                    <div key={i} className="absolute h-px bg-linear-to-r from-transparent via-[#F5B800] to-transparent"
                         style={{ top: `${15 + i * 14}%`, left: '-20%', right: '-20%', transform: 'rotate(-8deg)' }}
                     />
                 ))}
@@ -111,7 +111,7 @@ export default function HeroSection({ nama, tagline }: Props) {
 
                 <div ref={badgesRef} className="mb-8 flex flex-wrap items-center justify-center gap-3">
                     {TRUST_BADGES.map((badge) => (
-                        <span key={badge} className="flex items-center gap-1.5 rounded-full border border-[#C9A84C]/20 bg-[#C9A84C]/8 px-4 py-1.5 text-xs font-semibold tracking-widest text-[#C9A84C] uppercase">
+                        <span key={badge} className="flex items-center gap-1.5 rounded-full border border-[#F5B800]/20 bg-[#F5B800]/8 px-4 py-1.5 text-xs font-semibold tracking-widest text-[#F5B800] uppercase">
                             <CheckCircle className="h-3 w-3" />
                             {badge}
                         </span>
@@ -121,15 +121,15 @@ export default function HeroSection({ nama, tagline }: Props) {
                 <div ref={headlineRef}>
                     <h1 className="text-5xl font-black leading-[0.95] tracking-tight text-white md:text-6xl lg:text-8xl">
                         <span className="block uppercase">Solusi</span>
-                        <span className="block bg-linear-to-r from-[#C9A84C] via-[#E8D48B] to-[#C9A84C] bg-clip-text text-transparent uppercase">Pengamanan</span>
+                        <span className="block bg-linear-to-r from-[#F5B800] via-[#FFE066] to-[#F5B800] bg-clip-text text-transparent uppercase">Pengamanan</span>
                         <span className="block uppercase">Profesional</span>
                     </h1>
                 </div>
 
                 <div className="mx-auto my-8 flex items-center gap-4">
-                    <div className="h-px flex-1 bg-linear-to-r from-transparent to-[#C9A84C]/30" />
-                    <Shield className="h-5 w-5 text-[#C9A84C]/50" />
-                    <div className="h-px flex-1 bg-linear-to-l from-transparent to-[#C9A84C]/30" />
+                    <div className="h-px flex-1 bg-linear-to-r from-transparent to-[#F5B800]/30" />
+                    <Shield className="h-5 w-5 text-[#F5B800]/50" />
+                    <div className="h-px flex-1 bg-linear-to-l from-transparent to-[#F5B800]/30" />
                 </div>
 
                 <p ref={taglineRef} className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-white/50 md:text-xl">
@@ -137,14 +137,14 @@ export default function HeroSection({ nama, tagline }: Props) {
                 </p>
 
                 <div ref={ctaRef} className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-                    <button onClick={() => scrollTo('kontak')} className="group relative overflow-hidden rounded-lg bg-linear-to-r from-[#C9A84C] to-[#B8973F] px-8 py-4 text-sm font-bold tracking-widest text-[#0D1B2A] uppercase shadow-lg shadow-[#C9A84C]/25 transition-all duration-300 hover:shadow-xl hover:shadow-[#C9A84C]/40 active:scale-95">
+                    <button onClick={() => scrollTo('kontak')} className="group relative overflow-hidden rounded-lg bg-linear-to-r from-[#F5B800] to-[#E0A800] px-8 py-4 text-sm font-bold tracking-widest text-[#181819] uppercase shadow-lg shadow-[#F5B800]/25 transition-all duration-300 hover:shadow-xl hover:shadow-[#F5B800]/40 active:scale-95">
                         <span className="relative z-10 flex items-center gap-2">
                             Konsultasi Gratis
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </span>
                         <div className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
                     </button>
-                    <button onClick={() => scrollTo('layanan')} className="rounded-lg border border-white/20 px-8 py-4 text-sm font-bold tracking-widest text-white uppercase transition-all duration-300 hover:border-[#C9A84C]/40 hover:bg-white/5 hover:text-[#C9A84C] active:scale-95">
+                    <button onClick={() => scrollTo('layanan')} className="rounded-lg border border-white/20 px-8 py-4 text-sm font-bold tracking-widest text-white uppercase transition-all duration-300 hover:border-[#F5B800]/40 hover:bg-white/5 hover:text-[#F5B800] active:scale-95">
                         Pelajari Layanan
                     </button>
                 </div>
@@ -152,7 +152,7 @@ export default function HeroSection({ nama, tagline }: Props) {
 
             {/* ── Stats Bar ── */}
             <div ref={statsBarRef} className="relative z-10 mx-auto mt-20 w-full max-w-6xl px-6 lg:px-8">
-                <div className="mb-10 h-px bg-linear-to-r from-transparent via-[#C9A84C]/20 to-transparent" />
+                <div className="mb-10 h-px bg-linear-to-r from-transparent via-[#F5B800]/20 to-transparent" />
                 <div ref={statsRef} className="grid grid-cols-2 gap-6 lg:grid-cols-4">
                     {STATS.map((stat, i) => (
                         <StatItem key={stat.label} stat={stat} visible={statsVisible} delay={i * 100} />
@@ -160,11 +160,11 @@ export default function HeroSection({ nama, tagline }: Props) {
                 </div>
             </div>
 
-            <button onClick={() => scrollTo('tentang')} className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce text-white/30 transition-colors hover:text-[#C9A84C]/60" aria-label="Scroll down">
+            <button onClick={() => scrollTo('tentang')} className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce text-white/30 transition-colors hover:text-[#F5B800]/60" aria-label="Scroll down">
                 <ChevronDown className="h-7 w-7" />
             </button>
 
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[#0A0A0A] to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[#111111] to-transparent" />
         </section>
     );
 }
@@ -175,10 +175,10 @@ function StatItem({ stat, visible, delay }: { stat: (typeof STATS)[0]; visible: 
         <div className="group text-center" style={{ transitionDelay: `${delay}ms` }}>
             <div className="relative inline-block">
                 <span className="text-4xl font-black text-white lg:text-5xl">{count}</span>
-                <span className="text-2xl font-black text-[#C9A84C] lg:text-3xl">{stat.suffix}</span>
+                <span className="text-2xl font-black text-[#F5B800] lg:text-3xl">{stat.suffix}</span>
             </div>
             <p className="mt-2 text-xs font-semibold tracking-widest text-white/40 uppercase">{stat.label}</p>
-            <div className="mx-auto mt-3 h-px w-8 bg-[#C9A84C]/30 transition-all duration-300 group-hover:w-16 group-hover:bg-[#C9A84C]/60" />
+            <div className="mx-auto mt-3 h-px w-8 bg-[#F5B800]/30 transition-all duration-300 group-hover:w-16 group-hover:bg-[#F5B800]/60" />
         </div>
     );
 }

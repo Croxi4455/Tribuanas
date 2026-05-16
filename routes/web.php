@@ -11,11 +11,14 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [LandingController::class, 'index'])->name('home');
+Route::get('/berita', [LandingController::class, 'berita'])->name('berita');
+Route::get('/berita/{slug}', [LandingController::class, 'showBerita'])->name('berita.show');
 Route::get('/layanan', [LandingController::class, 'layanan'])->name('layanan');
+Route::get('/layanan/{slug}', [LandingController::class, 'showLayanan'])->name('layanan.show');
 Route::get('/pelatihan', [LandingController::class, 'pelatihan'])->name('pelatihan');
+Route::get('/pelatihan/{id}', [LandingController::class, 'showPelatihan'])->name('pelatihan.show');
 Route::get('/mitra', [LandingController::class, 'mitra'])->name('mitra');
 Route::get('/galeri', [LandingController::class, 'galeri'])->name('galeri');
-Route::get('/berita', [LandingController::class, 'berita'])->name('berita');
 Route::get('/kontak', [LandingController::class, 'kontak'])->name('kontak');
 
 /*

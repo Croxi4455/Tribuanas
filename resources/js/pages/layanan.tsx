@@ -55,9 +55,10 @@ export default function LayananPage({ profil, layanan }: Props) {
                             {data.map((item, i) => {
                                 const Icon = ICON_MAP[item.icon?.toLowerCase() ?? ''] ?? ShieldCheck;
                                 return (
-                                    <div
+                                    <Link
                                         key={item.id}
-                                        className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#C9A84C]/25 hover:shadow-2xl hover:shadow-[#C9A84C]/10"
+                                        href={`/layanan/${item.slug}`}
+                                        className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] p-8 transition-all duration-300 hover:-translate-y-1 hover:border-[#C9A84C]/25 hover:shadow-2xl hover:shadow-[#C9A84C]/10 block"
                                     >
                                         <div className="mb-6 flex items-start justify-between">
                                             <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#C9A84C]/20 bg-[#C9A84C]/10 transition-all group-hover:border-[#C9A84C]/40">
@@ -74,7 +75,7 @@ export default function LayananPage({ profil, layanan }: Props) {
                                             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                                         </div>
                                         <div className="absolute bottom-0 left-0 h-px w-full bg-linear-to-r from-transparent via-[#C9A84C]/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                                    </div>
+                                    </Link>
                                 );
                             })}
                         </div>

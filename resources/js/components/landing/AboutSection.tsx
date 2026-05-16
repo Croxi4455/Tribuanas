@@ -48,30 +48,30 @@ export default function AboutSection({ deskripsi, tahun_berdiri }: Props) {
     }, []);
 
     return (
-        <section id="tentang" ref={sectionRef} className="relative overflow-hidden bg-[#0A0A0A] py-28 lg:py-36">
+        <section id="tentang" ref={sectionRef} className="relative overflow-hidden bg-[#111111] py-28 lg:py-36">
 
             {/* Background texture */}
             <div
                 className="absolute inset-0 opacity-[0.015]"
                 style={{
-                    backgroundImage: 'repeating-linear-gradient(45deg, #C9A84C 0, #C9A84C 1px, transparent 0, transparent 50%)',
+                    backgroundImage: 'repeating-linear-gradient(45deg, #F5B800 0, #F5B800 1px, transparent 0, transparent 50%)',
                     backgroundSize: '20px 20px',
                 }}
             />
-            <div className="absolute right-0 top-1/2 h-[500px] w-[500px] -translate-y-1/2 translate-x-1/3 rounded-full bg-[#C9A84C]/4 blur-[100px]" />
+            <div className="absolute right-0 top-1/2 h-[500px] w-[500px] -translate-y-1/2 translate-x-1/3 rounded-full bg-[#F5B800]/4 blur-[100px]" />
 
             <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
 
                 {/* ── Section Header ── */}
                 <div className={`mb-16 transition-all duration-700 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                     <div className="mb-4 flex items-center gap-3">
-                        <div className="h-px w-12 bg-[#C9A84C]" />
-                        <span className="text-xs font-bold tracking-[0.3em] text-[#C9A84C] uppercase">Tentang Kami</span>
+                        <div className="h-px w-12 bg-[#F5B800]" />
+                        <span className="text-xs font-bold tracking-[0.3em] text-[#F5B800] uppercase">Tentang Kami</span>
                     </div>
                     <h2 className="text-4xl font-black leading-tight tracking-tight text-white uppercase lg:text-6xl">
                         Keamanan adalah
                         <br />
-                        <span className="text-[#C9A84C]">Prioritas Utama</span>
+                        <span className="text-[#F5B800]">Prioritas Utama</span>
                     </h2>
                 </div>
 
@@ -92,7 +92,7 @@ export default function AboutSection({ deskripsi, tahun_berdiri }: Props) {
                         <div className="mt-8 space-y-3">
                             {['Pengamanan Aset & Fasilitas', 'Pelatihan Kompetensi Satpam', 'Outsourcing Tenaga Keamanan'].map((item) => (
                                 <div key={item} className="flex items-center gap-3">
-                                    <CheckCircle2 className="h-4 w-4 shrink-0 text-[#C9A84C]" />
+                                    <CheckCircle2 className="h-4 w-4 shrink-0 text-[#F5B800]" />
                                     <span className="text-sm font-medium text-white/65">{item}</span>
                                 </div>
                             ))}
@@ -101,10 +101,10 @@ export default function AboutSection({ deskripsi, tahun_berdiri }: Props) {
                         {/* CTA */}
                         <Link
                             href="/kontak"
-                            className="group mt-8 inline-flex items-center gap-2 text-sm font-bold tracking-widest text-[#C9A84C] uppercase transition-all hover:gap-4"
+                            className="group mt-8 inline-flex items-center gap-2 text-sm font-bold tracking-widest text-[#F5B800] uppercase transition-all hover:gap-4"
                         >
                             Konsultasi Sekarang
-                            <span className="h-px w-8 bg-[#C9A84C] transition-all group-hover:w-12" />
+                            <span className="h-px w-8 bg-[#F5B800] transition-all group-hover:w-12" />
                         </Link>
                     </div>
 
@@ -113,7 +113,7 @@ export default function AboutSection({ deskripsi, tahun_berdiri }: Props) {
 
                         {/* Shield watermark behind the grid */}
                         <Shield
-                            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[#C9A84C]/[0.04] pointer-events-none select-none"
+                            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[#F5B800]/[0.04] pointer-events-none select-none"
                             style={{ width: '420px', height: '420px' }}
                             strokeWidth={0.75}
                         />
@@ -124,21 +124,21 @@ export default function AboutSection({ deskripsi, tahun_berdiri }: Props) {
                                 return (
                                     <div
                                         key={item.title}
-                                        className={`group relative overflow-hidden rounded-xl border border-white/5 bg-white/3 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#C9A84C]/25 hover:shadow-lg hover:shadow-[#C9A84C]/8 ${
+                                        className={`group relative overflow-hidden rounded-xl border border-white/5 bg-white/3 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#F5B800]/25 hover:shadow-lg hover:shadow-[#F5B800]/8 ${
                                             visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
                                         }`}
                                         style={{ transitionDelay: `${400 + i * 80}ms` }}
                                     >
                                         {/* Icon */}
-                                        <div className="mb-4 inline-flex rounded-lg border border-[#C9A84C]/20 bg-[#C9A84C]/10 p-3 transition-all group-hover:border-[#C9A84C]/40 group-hover:bg-[#C9A84C]/15">
-                                            <Icon className="h-5 w-5 text-[#C9A84C]" />
+                                        <div className="mb-4 inline-flex rounded-lg border border-[#F5B800]/20 bg-[#F5B800]/10 p-3 transition-all group-hover:border-[#F5B800]/40 group-hover:bg-[#F5B800]/15">
+                                            <Icon className="h-5 w-5 text-[#F5B800]" />
                                         </div>
 
                                         <h3 className="mb-2 text-sm font-black tracking-tight text-white">{item.title}</h3>
                                         <p className="text-xs leading-relaxed text-white/40">{item.desc}</p>
 
                                         {/* Bottom accent line */}
-                                        <div className="absolute bottom-0 left-0 h-px w-full bg-linear-to-r from-transparent via-[#C9A84C]/30 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                                        <div className="absolute bottom-0 left-0 h-px w-full bg-linear-to-r from-transparent via-[#F5B800]/30 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                                     </div>
                                 );
                             })}

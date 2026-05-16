@@ -12,7 +12,13 @@ createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     layout: (name) => {
         // Company profile pages manage their own layout (Navbar + Footer)
-        const publicPages = ['welcome', 'layanan', 'pelatihan', 'mitra', 'galeri', 'berita', 'kontak'];
+        const publicPages = [
+            'welcome', 'error',
+            'berita', 'berita-detail',
+            'layanan', 'layanan-detail',
+            'pelatihan', 'pelatihan-detail',
+            'mitra', 'galeri', 'kontak',
+        ];
         if (publicPages.includes(name)) return null;
 
         switch (true) {

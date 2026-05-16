@@ -76,9 +76,10 @@ export default function PelatihanPage({ profil, pelatihan }: Props) {
                         {/* Cards */}
                         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                             {filtered.map((item) => (
-                                <div
+                                <Link
                                     key={item.id}
-                                    className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] p-7 transition-all hover:-translate-y-1 hover:border-[#C9A84C]/20 hover:shadow-xl hover:shadow-[#C9A84C]/8"
+                                    href={`/pelatihan/${item.id}`}
+                                    className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] p-7 transition-all hover:-translate-y-1 hover:border-[#C9A84C]/20 hover:shadow-xl hover:shadow-[#C9A84C]/8 block"
                                 >
                                     <div className="mb-6 flex items-start justify-between">
                                         <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#C9A84C]/20 bg-[#C9A84C]/10">
@@ -108,7 +109,7 @@ export default function PelatihanPage({ profil, pelatihan }: Props) {
                                         </div>
                                     </div>
                                     <div className="absolute bottom-0 left-0 h-px w-full bg-linear-to-r from-transparent via-[#C9A84C]/30 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     </div>

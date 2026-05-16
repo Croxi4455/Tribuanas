@@ -8,7 +8,7 @@ export default function AppSidebarLayout({ children, breadcrumbs = [] }: AppLayo
     return (
         <AppShell variant="sidebar" className="admin-theme">
             <AppSidebar />
-            <AppContent variant="sidebar" className="overflow-x-hidden bg-[#0A1628]">
+            <AppContent variant="sidebar" className="overflow-x-hidden bg-[#181819]">
                 <AppSidebarHeader breadcrumbs={breadcrumbs} />
                 {children}
             </AppContent>
