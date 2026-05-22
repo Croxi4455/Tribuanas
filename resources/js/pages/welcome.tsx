@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import Navbar from '@/components/landing/Navbar';
 import HeroSection from '@/components/landing/HeroSection';
 import Footer from '@/components/landing/Footer';
@@ -15,6 +15,7 @@ type Profil = {
     telepon: string;
     email: string;
     tahun_berdiri: number;
+    logo_url?: string | null;
     facebook: string | null;
     instagram: string | null;
     twitter: string | null;
@@ -41,7 +42,7 @@ export default function Welcome({ profil, layanan, mitra, testimoni }: Props) {
             </Head>
 
             <div className="min-h-screen bg-[#0A0A0A]" style={{ fontFamily: "'Inter', sans-serif" }}>
-                <Navbar />
+                <Navbar logo={profil?.logo_url} />
 
                 {/* Hero — full viewport */}
                 <HeroSection
@@ -66,9 +67,12 @@ export default function Welcome({ profil, layanan, mitra, testimoni }: Props) {
 
                 <Footer
                     nama={profil?.nama_perusahaan}
+                    logo={profil?.logo_url}
                     facebook={profil?.facebook}
                     instagram={profil?.instagram}
                     twitter={profil?.twitter}
+                    layanan={(usePage().props as any).footerData?.layanan}
+                    pelatihan={(usePage().props as any).footerData?.pelatihan}
                 />
             </div>
         </>

@@ -2,6 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
 import { GraduationCap, Clock, Award, BookOpen, ChevronRight } from 'lucide-react';
 import CompanyLayout from '@/layouts/company-layout';
+import { stripHtml } from '@/lib/utils';
 
 type Pelatihan = {
     id: number;
@@ -64,7 +65,7 @@ export default function PelatihanPage({ profil, pelatihan }: Props) {
                                     onClick={() => setActive(tab.value)}
                                     className={`rounded-lg px-6 py-2.5 text-sm font-bold tracking-widest uppercase transition-all ${
                                         active === tab.value
-                                            ? 'bg-[#C9A84C] text-[#0D1B2A] shadow-lg shadow-[#C9A84C]/20'
+                                            ? 'bg-[#F5B800] text-[#181819] shadow-lg shadow-[#F5B800]/20'
                                             : 'border border-white/10 text-white/50 hover:border-white/20 hover:text-white'
                                     }`}
                                 >
@@ -79,13 +80,13 @@ export default function PelatihanPage({ profil, pelatihan }: Props) {
                                 <Link
                                     key={item.id}
                                     href={`/pelatihan/${item.id}`}
-                                    className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] p-7 transition-all hover:-translate-y-1 hover:border-[#C9A84C]/20 hover:shadow-xl hover:shadow-[#C9A84C]/8 block"
+                                    className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] p-7 transition-all hover:-translate-y-1 hover:border-[#F5B800]/20 hover:shadow-xl hover:shadow-[#F5B800]/8 block"
                                 >
                                     <div className="mb-6 flex items-start justify-between">
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#C9A84C]/20 bg-[#C9A84C]/10">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#F5B800]/20 bg-[#F5B800]/10">
                                             {item.jenis === 'kompetensi_dasar'
-                                                ? <GraduationCap className="h-6 w-6 text-[#C9A84C]" />
-                                                : <BookOpen className="h-6 w-6 text-[#C9A84C]" />
+                                                ? <GraduationCap className="h-6 w-6 text-[#F5B800]" />
+                                                : <BookOpen className="h-6 w-6 text-[#F5B800]" />
                                             }
                                         </div>
                                         <span className={`rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase ${
@@ -97,18 +98,18 @@ export default function PelatihanPage({ profil, pelatihan }: Props) {
                                         </span>
                                     </div>
                                     <h3 className="mb-3 text-lg font-black tracking-tight text-white uppercase">{item.judul}</h3>
-                                    <p className="mb-6 text-sm leading-relaxed text-white/45">{item.deskripsi}</p>
+                                    <p className="mb-6 text-sm leading-relaxed text-white/45">{stripHtml(item.deskripsi)}</p>
                                     <div className="flex items-center justify-between border-t border-white/5 pt-5">
                                         <div className="flex items-center gap-1.5 text-xs text-white/35">
-                                            <Clock className="h-3.5 w-3.5 text-[#C9A84C]/60" />
+                                            <Clock className="h-3.5 w-3.5 text-[#F5B800]/60" />
                                             {item.durasi}
                                         </div>
-                                        <div className="flex items-center gap-1 text-xs font-bold text-[#C9A84C]/50 uppercase tracking-wider group-hover:text-[#C9A84C] transition-colors">
+                                        <div className="flex items-center gap-1 text-xs font-bold text-[#F5B800]/50 uppercase tracking-wider group-hover:text-[#F5B800] transition-colors">
                                             <Award className="h-3.5 w-3.5" />
                                             Bersertifikat
                                         </div>
                                     </div>
-                                    <div className="absolute bottom-0 left-0 h-px w-full bg-linear-to-r from-transparent via-[#C9A84C]/30 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                                    <div className="absolute bottom-0 left-0 h-px w-full bg-linear-to-r from-transparent via-[#F5B800]/30 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                                 </Link>
                             ))}
                         </div>
@@ -116,7 +117,7 @@ export default function PelatihanPage({ profil, pelatihan }: Props) {
                 </section>
 
                 {/* ── CTA ── */}
-                <section className="bg-[#111827] py-20">
+                <section className="bg-[#1C1C1E] py-20">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
                         <div className="flex flex-col items-center gap-6 text-center">
                             <h3 className="text-2xl font-black tracking-tight text-white uppercase lg:text-4xl">
@@ -127,7 +128,7 @@ export default function PelatihanPage({ profil, pelatihan }: Props) {
                             </p>
                             <Link
                                 href="/kontak"
-                                className="flex items-center gap-2 rounded-lg bg-linear-to-r from-[#C9A84C] to-[#B8973F] px-8 py-4 text-sm font-bold tracking-widest text-[#0D1B2A] uppercase shadow-lg shadow-[#C9A84C]/20 transition-all hover:shadow-xl active:scale-95"
+                                className="flex items-center gap-2 rounded-lg bg-linear-to-r from-[#F5B800] to-[#E0A800] px-8 py-4 text-sm font-bold tracking-widest text-[#181819] uppercase shadow-lg shadow-[#F5B800]/20 transition-all hover:shadow-xl active:scale-95"
                             >
                                 Daftar Sekarang
                                 <ChevronRight className="h-4 w-4" />

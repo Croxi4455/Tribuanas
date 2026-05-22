@@ -2,6 +2,7 @@ import React from 'react';
 import { Head, Link } from '@inertiajs/react';
 import { Calendar, ArrowUpRight } from 'lucide-react';
 import CompanyLayout from '@/layouts/company-layout';
+import Pagination from '@/components/ui/pagination';
 
 type Berita = {
     id: number;
@@ -9,24 +10,29 @@ type Berita = {
     slug: string;
     isi: string;
     gambar: string | null;
-    gambar_url: string | null; // Tambahkan field ini
+    gambar_url: string | null;
     tanggal_publish: string;
     is_published: boolean;
 };
 
-type Props = {
-    profil: any;
-    berita: Berita[];
+type PaginatedBerita = {
+    data: Berita[];
+    links: { url: string | null; label: string; active: boolean }[];
 };
 
-export default function BeritaPage({ profil, berita = [] }: Props) {
-    // 1. Prioritaskan data dari database, jangan pakai DUMMY kalau sudah ada data
-    const data = berita;
+type Props = {
+    profil: any;
+    berita: PaginatedBerita | Berita[];
+};
+
+export default function BeritaPage({ profil, berita }: Props) {
+    const isPaginated = berita && 'data' in berita;
+    const data = isPaginated ? berita.data : (berita || []);
+    const links = isPaginated ? berita.links : [];
 
     const formatDate = (d: string) =>
         new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 
-    // Handle jika berita kosong agar tidak error saat destructuring
     if (data.length === 0) {
         return (
             <CompanyLayout profil={profil} title="Berita & Kegiatan" subtitle="Berita" image="https://picsum.photos/1920/600?grayscale">
@@ -113,6 +119,8 @@ export default function BeritaPage({ profil, berita = [] }: Props) {
                                 </Link>
                             ))}
                         </div>
+
+                        {links.length > 3 && <Pagination links={links} />}
 
                     </div>
                 </section>

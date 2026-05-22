@@ -27,7 +27,16 @@ export default function BeritaDetailPage({ profil, berita, beritaLainnya }: Prop
 
     return (
         <>
-            <Head title={`${berita.judul} — Tribuana Security`} />
+            <Head title={`${berita.judul} — Tribuana Security`}>
+                <meta name="description" content={berita.isi.replace(/<[^>]*>/g, '').substring(0, 160)} />
+                <meta property="og:title" content={berita.judul} />
+                <meta property="og:description" content={berita.isi.replace(/<[^>]*>/g, '').substring(0, 160)} />
+                <meta property="og:image" content={imgSrc} />
+                <meta property="og:type" content="article" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={berita.judul} />
+                <meta name="twitter:image" content={imgSrc} />
+            </Head>
             <CompanyLayout
                 profil={profil}
                 title={berita.judul}
@@ -59,7 +68,7 @@ export default function BeritaDetailPage({ profil, berita, beritaLainnya }: Prop
                                     <img
                                         src={imgSrc}
                                         alt={berita.judul}
-                                        className="max-h-[480px] w-full object-cover object-center"
+                                        loading="lazy" decoding="async" className="max-h-[480px] w-full object-cover object-center"
                                     />
                                 </div>
 

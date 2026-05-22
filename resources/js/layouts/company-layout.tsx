@@ -1,8 +1,10 @@
 import Navbar from '@/components/landing/Navbar';
 import Footer from '@/components/landing/Footer';
+import { usePage } from '@inertiajs/react';
 
 type Profil = {
     nama_perusahaan?: string;
+    logo_url?: string | null;
     facebook?: string | null;
     instagram?: string | null;
     twitter?: string | null;
@@ -24,7 +26,7 @@ export default function CompanyLayout({ profil, children, title, subtitle, image
 
     return (
         <div className="min-h-screen bg-[#111111]" style={{ fontFamily: "'Inter', sans-serif" }}>
-            <Navbar />
+            <Navbar logo={profil?.logo_url} />
 
             {/* ── Page Hero Banner ── */}
             <div className="relative overflow-hidden pt-32 pb-24">
@@ -34,7 +36,7 @@ export default function CompanyLayout({ profil, children, title, subtitle, image
                     <img
                         src={bgImage}
                         alt=""
-                        className="h-full w-full object-cover object-center"
+                        loading="lazy" decoding="async" className="h-full w-full object-cover object-center"
                     />
                     {/* Dark overlay */}
                     <div className="absolute inset-0 bg-[#181819]/80" />
@@ -82,9 +84,12 @@ export default function CompanyLayout({ profil, children, title, subtitle, image
 
             <Footer
                 nama={profil?.nama_perusahaan}
+                logo={profil?.logo_url}
                 facebook={profil?.facebook}
                 instagram={profil?.instagram}
                 twitter={profil?.twitter}
+                layanan={(usePage().props as any).footerData?.layanan}
+                pelatihan={(usePage().props as any).footerData?.pelatihan}
             />
         </div>
     );

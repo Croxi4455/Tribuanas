@@ -81,6 +81,8 @@ export default function HeroSection({ nama, tagline }: Props) {
                 <img
                     src="https://picsum.photos/1920/1080?grayscale&random=10"
                     alt=""
+                    fetchPriority="high"
+                    decoding="async"
                     className="h-full w-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-[#181819]/75" />

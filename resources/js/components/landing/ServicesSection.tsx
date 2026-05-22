@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from '@inertiajs/react';
-import { Shield, Eye, UserCheck, Car, Camera, Lock, Siren, ShieldCheck, ArrowUpRight } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { ShieldCheck, ArrowUpRight } from 'lucide-react';
+import { stripHtml } from '@/lib/utils';
 
 type Layanan = {
     id: number;
     nama: string;
     slug: string;
     deskripsi: string;
-    icon: string | null;
+    gambar: string | null;
+    gambar_url?: string | null;
     urutan: number;
 };
 
@@ -16,50 +17,11 @@ type Props = {
     layanan: Layanan[];
 };
 
-const ICON_MAP: Record<string, LucideIcon> = {
-    shield: Shield,
-    eye: Eye,
-    'user-check': UserCheck,
-    car: Car,
-    camera: Camera,
-    lock: Lock,
-    siren: Siren,
-};
-
-// Fallback dummy services if no data
-const DUMMY_SERVICES = [
-    {
-        id: 1,
-        nama: 'Security Guard',
-        slug: 'security-guard',
-        deskripsi: 'Penjagaan profesional untuk aset, gedung, dan fasilitas instansi pemerintah maupun swasta dengan personel bersertifikat Polri.',
-        icon: 'shield',
-        urutan: 1,
-    },
-    {
-        id: 2,
-        nama: 'Security Escort',
-        slug: 'security-escort',
-        deskripsi: 'Layanan pengawalan VIP, pejabat, dan kelompok dengan protokol keamanan ketat dan personel terlatih khusus.',
-        icon: 'car',
-        urutan: 2,
-    },
-    {
-        id: 3,
-        nama: 'Security Event',
-        slug: 'security-event',
-        deskripsi: 'Pengamanan acara, konser, seminar, dan kegiatan publik skala besar dengan koordinasi tim yang terstruktur.',
-        icon: 'eye',
-        urutan: 3,
-    },
+const DUMMY_SERVICES: Layanan[] = [
+    { id: 1, nama: 'Security Guard', slug: 'security-guard', deskripsi: 'Penjagaan profesional untuk aset, gedung, dan fasilitas instansi pemerintah maupun swasta dengan personel bersertifikat Polri.', gambar: null, urutan: 1 },
+    { id: 2, nama: 'Security Escort', slug: 'security-escort', deskripsi: 'Layanan pengawalan VIP, pejabat, dan kelompok dengan protokol keamanan ketat dan personel terlatih khusus.', gambar: null, urutan: 2 },
+    { id: 3, nama: 'Security Event', slug: 'security-event', deskripsi: 'Pengamanan acara, konser, seminar, dan kegiatan publik skala besar dengan koordinasi tim yang terstruktur.', gambar: null, urutan: 3 },
 ];
-
-function getIcon(iconName: string | null): LucideIcon {
-    if (iconName && ICON_MAP[iconName.toLowerCase()]) {
-        return ICON_MAP[iconName.toLowerCase()];
-    }
-    return ShieldCheck;
-}
 
 export default function ServicesSection({ layanan }: Props) {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -115,18 +77,14 @@ export default function ServicesSection({ layanan }: Props) {
 
                 {/* ── Services Grid ── */}
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {data.map((item, i) => {
-                        const Icon = getIcon(item.icon);
-                        return (
-                            <ServiceCard
-                                key={item.id}
-                                item={item}
-                                Icon={Icon}
-                                visible={visible}
-                                delay={i * 100}
-                            />
-                        );
-                    })}
+                    {data.map((item, i) => (
+                        <ServiceCard
+                            key={item.id}
+                            item={item}
+                            visible={visible}
+                            delay={i * 100}
+                        />
+                    ))}
                 </div>
 
                 {/* ── Bottom CTA ── */}
@@ -151,12 +109,10 @@ export default function ServicesSection({ layanan }: Props) {
 
 function ServiceCard({
     item,
-    Icon,
     visible,
     delay,
 }: {
     item: (typeof DUMMY_SERVICES)[0];
-    Icon: LucideIcon;
     visible: boolean;
     delay: number;
 }) {
@@ -174,8 +130,8 @@ function ServiceCard({
             <div className="p-7">
                 {/* Top row: icon + number */}
                 <div className="mb-5 flex items-start justify-between">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#F5B800]/20 bg-[#F5B800]/8 transition-colors group-hover:border-[#F5B800]/35 group-hover:bg-[#F5B800]/12">
-                        <Icon className="h-5 w-5 text-[#F5B800]" />
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#F5B800]/20 bg-[#F5B800]/8 transition-colors group-hover:border-[#F5B800]/35 group-hover:bg-[#F5B800]/12">
+                        <ShieldCheck className="h-5 w-5 text-[#F5B800]" />
                     </div>
                     <span className="font-black text-[#F5B800]/12 text-5xl leading-none select-none group-hover:text-[#F5B800]/20 transition-colors">
                         {String(item.urutan).padStart(2, '0')}
@@ -192,7 +148,7 @@ function ServiceCard({
 
                 {/* Description */}
                 <p className="line-clamp-3 text-sm leading-relaxed text-white/40">
-                    {item.deskripsi}
+                    {stripHtml(item.deskripsi)}
                 </p>
             </div>
 

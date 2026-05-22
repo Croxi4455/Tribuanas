@@ -1,121 +1,52 @@
-import { Head } from '@inertiajs/react';
-import { Briefcase, MapPin, Plus } from 'lucide-react';
+import { stripHtml } from "@/lib/utils";
+import { Head, Link, router } from '@inertiajs/react';
+import { Plus, Edit3, Trash2, Briefcase, MapPin, Calendar } from 'lucide-react';
+import { useState } from 'react';
+import DeleteModal from '@/components/ui/delete-modal';
 
-type Karir = {
-    id: number;
-    posisi: string;
-    deskripsi: string;
-    syarat: string;
-    lokasi: string;
-    status: 'buka' | 'tutup';
-    batas_daftar: string;
-};
+type Karir = { id: number; posisi: string; deskripsi: string; syarat: string; lokasi: string; status: string; batas_daftar: string };
 
-type Props = {
-    karir: Karir[];
-};
-
-export default function KarirIndex({ karir }: Props) {
+export default function KarirIndex({ karir = [] }: { karir: Karir[] }) {
+    const [deleteUrl, setDeleteUrl] = useState('');
     return (
         <>
             <Head title="Manajemen Karir" />
-            <div className="flex h-full flex-1 flex-col gap-6 p-4 md:p-6">
-                {/* Header */}
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex h-full flex-1 flex-col gap-6 p-6 md:p-8">
+                <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-2xl font-bold tracking-tight">Manajemen Karir</h1>
-                        <p className="text-muted-foreground">
-                            Kelola lowongan kerja dan rekrutmen perusahaan
-                        </p>
+                        <h1 className="text-2xl font-black tracking-tight text-white uppercase">Karir</h1>
+                        <p className="text-sm text-white/40">Kelola lowongan kerja</p>
                     </div>
-                    <button
-                        className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground opacity-50 cursor-not-allowed"
-                        disabled
-                    >
-                        <Plus className="h-4 w-4" />
-                        Tambah Lowongan
-                    </button>
+                    <Link href="/admin/karir/create" className="flex items-center gap-2 rounded-lg bg-[#F5B800] px-5 py-2.5 text-xs font-black tracking-widest text-[#111] uppercase shadow-lg shadow-[#F5B800]/20 transition-all hover:shadow-xl active:scale-95">
+                        <Plus className="h-4 w-4" /> Tambah
+                    </Link>
                 </div>
 
-                {/* Table */}
-                <div className="overflow-hidden rounded-xl border border-sidebar-border/70 bg-card dark:border-sidebar-border">
-                    <div className="overflow-x-auto">
-                        <table className="w-full">
-                            <thead>
-                                <tr className="border-b border-sidebar-border/70 bg-muted/50 dark:border-sidebar-border">
-                                    <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">No</th>
-                                    <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">Posisi</th>
-                                    <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">Lokasi</th>
-                                    <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">Status</th>
-                                    <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">Batas Daftar</th>
-                                    <th className="px-5 py-3 text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-sidebar-border/70 dark:divide-sidebar-border">
-                                {karir.map((item, index) => {
-                                    const isExpired = new Date(item.batas_daftar) < new Date();
-                                    return (
-                                        <tr key={item.id} className="transition-colors hover:bg-muted/30">
-                                            <td className="whitespace-nowrap px-5 py-3.5 text-sm text-muted-foreground">{index + 1}</td>
-                                            <td className="px-5 py-3.5">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-500/10">
-                                                        <Briefcase className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                                                    </div>
-                                                    <div>
-                                                        <p className="text-sm font-medium">{item.posisi}</p>
-                                                        <p className="text-xs text-muted-foreground line-clamp-1 max-w-sm">{item.deskripsi}</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="whitespace-nowrap px-5 py-3.5">
-                                                <span className="inline-flex items-center gap-1 text-sm text-muted-foreground">
-                                                    <MapPin className="h-3.5 w-3.5" />
-                                                    {item.lokasi}
-                                                </span>
-                                            </td>
-                                            <td className="whitespace-nowrap px-5 py-3.5">
-                                                <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                                                    item.status === 'buka'
-                                                        ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
-                                                        : 'bg-red-500/10 text-red-600 dark:text-red-400'
-                                                }`}>
-                                                    {item.status === 'buka' ? 'Buka' : 'Tutup'}
-                                                </span>
-                                            </td>
-                                            <td className="whitespace-nowrap px-5 py-3.5">
-                                                <span className={`text-sm ${isExpired ? 'text-red-500' : 'text-muted-foreground'}`}>
-                                                    {new Date(item.batas_daftar).toLocaleDateString('id-ID', {
-                                                        day: 'numeric',
-                                                        month: 'short',
-                                                        year: 'numeric',
-                                                    })}
-                                                    {isExpired && <span className="ml-1 text-xs">(Kadaluarsa)</span>}
-                                                </span>
-                                            </td>
-                                            <td className="whitespace-nowrap px-5 py-3.5 text-right">
-                                                <div className="flex items-center justify-end gap-1">
-                                                    <button className="rounded-md px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Edit</button>
-                                                    <button className="rounded-md px-2.5 py-1.5 text-xs font-medium text-red-600 transition-colors hover:bg-red-500/10 dark:text-red-400">Hapus</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                    </div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {karir.map((item) => (
+                        <div key={item.id} className="overflow-hidden rounded-xl border border-white/6 bg-white/3 p-6">
+                            <div className="mb-4 flex items-start justify-between">
+                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#F5B800]/10"><Briefcase className="h-5 w-5 text-[#F5B800]" /></div>
+                                <span className={`rounded px-2 py-0.5 text-[10px] font-bold uppercase ${item.status === 'buka' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>{item.status}</span>
+                            </div>
+                            <h3 className="mb-2 text-base font-black text-white">{item.posisi}</h3>
+                            <div className="mb-3 flex flex-wrap gap-3 text-xs text-white/40">
+                                <span className="flex items-center gap-1"><MapPin className="h-3 w-3 text-[#F5B800]/50" />{item.lokasi}</span>
+                                <span className="flex items-center gap-1"><Calendar className="h-3 w-3 text-[#F5B800]/50" />{item.batas_daftar?.split('T')[0]}</span>
+                            </div>
+                            <p className="mb-4 text-sm text-white/40 line-clamp-2">{stripHtml(item.deskripsi)}</p>
+                            <div className="flex gap-2">
+                                <Link href={`/admin/karir/${item.id}/edit`} className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-white/5 py-2 text-xs font-bold text-blue-400 hover:bg-blue-500 hover:text-white"><Edit3 className="h-3.5 w-3.5" />Edit</Link>
+                                <button onClick={() => setDeleteUrl(`/admin/karir/${item.id}`)} className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-white/5 py-2 text-xs font-bold text-red-400 hover:bg-red-500 hover:text-white"><Trash2 className="h-3.5 w-3.5" />Hapus</button>
+                            </div>
+                        </div>
+                    ))}
+                    {karir.length === 0 && <div className="col-span-full py-12 text-center text-white/25">Belum ada lowongan</div>}
                 </div>
-
-                <p className="text-xs text-muted-foreground">Total: {karir.length} lowongan</p>
             </div>
+            <DeleteModal show={!!deleteUrl} onClose={() => setDeleteUrl('')} url={deleteUrl} title="Hapus Lowongan" />
         </>
     );
 }
 
-KarirIndex.layout = {
-    breadcrumbs: [
-        { title: 'Admin', href: '/admin/dashboard' },
-        { title: 'Karir', href: '/admin/karir' },
-    ],
-};
+KarirIndex.layout = { breadcrumbs: [{ title: 'Admin', href: '/admin/dashboard' }, { title: 'Karir', href: '/admin/karir' }] };

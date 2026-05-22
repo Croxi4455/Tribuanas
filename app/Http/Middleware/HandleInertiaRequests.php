@@ -35,6 +35,8 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $profil = \App\Models\ProfilPerusahaan::first();
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
@@ -42,6 +44,16 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'appLogo' => $profil && $profil->logo ? asset('storage/' . $profil->logo) : '/assets/logo.png',
+            'footerData' => [
+                'layanan' => \App\Models\Layanan::ordered()->take(5)->get(['nama', 'slug'])->map(fn ($l) => ['label' => $l->nama, 'href' => '/layanan/' . $l->slug]),
+                'pelatihan' => \App\Models\Pelatihan::active()->take(5)->get(['id', 'judul'])->map(fn ($p) => ['label' => $p->judul, 'href' => '/pelatihan/' . $p->id]),
+            ],
+            'flash' => [
+                'success' => fn () => $request->session()->get('success'),
+                'error'   => fn () => $request->session()->get('error'),
+                'info'    => fn () => $request->session()->get('info'),
+            ],
         ];
     }
 }

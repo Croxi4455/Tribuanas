@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Clock, Award, ChevronRight } from 'lucide-react';
+import { stripHtml } from '@/lib/utils';
 
 type Pelatihan = {
     id: number;
@@ -134,7 +135,7 @@ export default function TrainingSection({ pelatihan }: Props) {
 
                                 {/* Description */}
                                 <p className="line-clamp-3 text-sm leading-relaxed text-white/40">
-                                    {item.deskripsi}
+                                    {stripHtml(item.deskripsi)}
                                 </p>
                             </div>
 
