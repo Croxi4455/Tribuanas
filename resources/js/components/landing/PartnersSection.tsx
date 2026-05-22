@@ -4,6 +4,7 @@ type Mitra = {
     id: number;
     nama: string;
     logo: string | null;
+    logo_url?: string | null;
     kota: string;
     tahun: number;
 };
@@ -79,9 +80,22 @@ export default function PartnersSection({ mitra }: Props) {
                             key={`${item.id}-${i}`}
                             className="group flex min-w-[260px] shrink-0 items-center gap-4 rounded-xl border border-white/5 bg-white/[0.03] px-6 py-5 transition-all hover:border-[#F5B800]/20 hover:bg-[#F5B800]/5"
                         >
-                            {/* Logo placeholder */}
-                            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#F5B800]/20 bg-[#F5B800]/10 text-base font-black text-[#F5B800]">
-                                {item.nama.charAt(0)}
+                            {/* Logo */}
+                            <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg overflow-hidden text-base font-black text-[#F5B800] ${(item.logo_url || item.logo) ? '' : 'border border-[#F5B800]/20 bg-[#F5B800]/10'}`}>
+                                {(item.logo_url || item.logo) ? (
+                                    <img
+                                        src={item.logo_url || `/storage/${item.logo}`}
+                                        alt={item.nama}
+                                        className="h-full w-full object-contain"
+                                        loading="lazy"
+                                        onError={(e) => {
+                                            const p = e.currentTarget.parentElement;
+                                            if (p) { e.currentTarget.remove(); p.className = 'flex h-11 w-11 shrink-0 items-center justify-center rounded-lg overflow-hidden text-base font-black text-[#F5B800] border border-[#F5B800]/20 bg-[#F5B800]/10'; p.textContent = item.nama.charAt(0); }
+                                        }}
+                                    />
+                                ) : (
+                                    item.nama.charAt(0)
+                                )}
                             </div>
                             <div className="min-w-0">
                                 <p className="truncate text-sm font-bold text-white/80 group-hover:text-white">{item.nama}</p>
@@ -103,8 +117,21 @@ export default function PartnersSection({ mitra }: Props) {
                             key={`rev-${item.id}-${i}`}
                             className="group flex min-w-[260px] shrink-0 items-center gap-4 rounded-xl border border-white/5 bg-white/[0.03] px-6 py-5 transition-all hover:border-[#F5B800]/20 hover:bg-[#F5B800]/5"
                         >
-                            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#F5B800]/15 bg-[#F5B800]/8 text-base font-black text-[#F5B800]/70">
-                                {item.nama.charAt(0)}
+                            <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg overflow-hidden text-base font-black text-[#F5B800]/70 ${(item.logo_url || item.logo) ? '' : 'border border-[#F5B800]/15 bg-[#F5B800]/8'}`}>
+                                {(item.logo_url || item.logo) ? (
+                                    <img
+                                        src={item.logo_url || `/storage/${item.logo}`}
+                                        alt={item.nama}
+                                        className="h-full w-full object-contain"
+                                        loading="lazy"
+                                        onError={(e) => {
+                                            const p = e.currentTarget.parentElement;
+                                            if (p) { e.currentTarget.remove(); p.className = 'flex h-11 w-11 shrink-0 items-center justify-center rounded-lg overflow-hidden text-base font-black text-[#F5B800]/70 border border-[#F5B800]/15 bg-[#F5B800]/8'; p.textContent = item.nama.charAt(0); }
+                                        }}
+                                    />
+                                ) : (
+                                    item.nama.charAt(0)
+                                )}
                             </div>
                             <div className="min-w-0">
                                 <p className="truncate text-sm font-bold text-white/60 group-hover:text-white/80">{item.nama}</p>

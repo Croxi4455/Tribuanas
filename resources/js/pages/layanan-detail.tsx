@@ -1,6 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import { Shield, Eye, UserCheck, Car, Camera, Lock, Siren, ShieldCheck, ArrowLeft, ArrowUpRight, CheckCircle2 } from 'lucide-react';
-import type { LucideIcon } from 'lucide-react';
+import { ShieldCheck, ArrowLeft, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import CompanyLayout from '@/layouts/company-layout';
 
 type Layanan = {
@@ -8,7 +7,8 @@ type Layanan = {
     nama: string;
     slug: string;
     deskripsi: string;
-    icon: string | null;
+    gambar: string | null;
+    gambar_url?: string | null;
     urutan: number;
 };
 
@@ -16,11 +16,6 @@ type Props = {
     profil: any;
     layanan: Layanan;
     layananLainnya: Layanan[];
-};
-
-const ICON_MAP: Record<string, LucideIcon> = {
-    shield: Shield, eye: Eye, 'user-check': UserCheck,
-    car: Car, camera: Camera, lock: Lock, siren: Siren,
 };
 
 const FITUR_UMUM = [
@@ -33,7 +28,7 @@ const FITUR_UMUM = [
 ];
 
 export default function LayananDetailPage({ profil, layanan, layananLainnya }: Props) {
-    const Icon = ICON_MAP[layanan.icon?.toLowerCase() ?? ''] ?? ShieldCheck;
+    const imgSrc = layanan.gambar_url || (layanan.gambar ? `/storage/${layanan.gambar}` : null);
 
     return (
         <>
@@ -42,7 +37,7 @@ export default function LayananDetailPage({ profil, layanan, layananLainnya }: P
                 profil={profil}
                 title={layanan.nama}
                 subtitle="Layanan"
-                image={`https://picsum.photos/1920/600?grayscale&random=${layanan.id + 30}`}
+                image={imgSrc || `https://picsum.photos/1920/600?grayscale&random=${layanan.id + 30}`}
             >
                 <section className="py-16 lg:py-20">
                     <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -59,10 +54,10 @@ export default function LayananDetailPage({ profil, layanan, layananLainnya }: P
 
                             {/* ── Konten Utama ── */}
                             <div className="lg:col-span-2">
-                                {/* Icon + Title */}
+                                {/* Title */}
                                 <div className="mb-8 flex items-center gap-5">
                                     <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[#F5B800]/20 bg-[#F5B800]/10">
-                                        <Icon className="h-8 w-8 text-[#F5B800]" />
+                                        <ShieldCheck className="h-8 w-8 text-[#F5B800]" />
                                     </div>
                                     <div>
                                         <p className="text-xs font-bold tracking-[0.3em] text-[#F5B800]/60 uppercase">Layanan Kami</p>
@@ -72,7 +67,7 @@ export default function LayananDetailPage({ profil, layanan, layananLainnya }: P
 
                                 {/* Deskripsi */}
                                 <div className="rounded-2xl border border-white/5 bg-white/3 p-8">
-                                    <p className="text-base leading-relaxed text-white/65">{layanan.deskripsi}</p>
+                                    <div className="prose prose-invert prose-sm max-w-none prose-headings:text-white prose-headings:font-black prose-p:text-white/65 prose-p:leading-relaxed prose-a:text-[#F5B800] prose-strong:text-white prose-li:text-white/65" dangerouslySetInnerHTML={{ __html: layanan.deskripsi }} />
                                 </div>
 
                                 {/* Fitur */}
@@ -107,24 +102,21 @@ export default function LayananDetailPage({ profil, layanan, layananLainnya }: P
                                         Layanan Lainnya
                                     </h3>
                                     <div className="space-y-3">
-                                        {layananLainnya.map((item) => {
-                                            const ItemIcon = ICON_MAP[item.icon?.toLowerCase() ?? ''] ?? ShieldCheck;
-                                            return (
-                                                <Link
-                                                    key={item.id}
-                                                    href={`/layanan/${item.slug}`}
-                                                    className="group flex items-center gap-4 rounded-xl border border-white/5 bg-white/3 p-4 transition-all hover:border-[#F5B800]/20"
-                                                >
-                                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#F5B800]/15 bg-[#F5B800]/8">
-                                                        <ItemIcon className="h-5 w-5 text-[#F5B800]/70" />
-                                                    </div>
-                                                    <span className="text-sm font-bold text-white/60 transition-colors group-hover:text-white">
-                                                        {item.nama}
-                                                    </span>
-                                                    <ArrowUpRight className="ml-auto h-3.5 w-3.5 shrink-0 text-white/20 transition-colors group-hover:text-[#F5B800]/60" />
-                                                </Link>
-                                            );
-                                        })}
+                                        {layananLainnya.map((item) => (
+                                            <Link
+                                                key={item.id}
+                                                href={`/layanan/${item.slug}`}
+                                                className="group flex items-center gap-4 rounded-xl border border-white/5 bg-white/3 p-4 transition-all hover:border-[#F5B800]/20"
+                                            >
+                                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#F5B800]/15 bg-[#F5B800]/8">
+                                                    <ShieldCheck className="h-5 w-5 text-[#F5B800]/70" />
+                                                </div>
+                                                <span className="text-sm font-bold text-white/60 transition-colors group-hover:text-white">
+                                                    {item.nama}
+                                                </span>
+                                                <ArrowUpRight className="ml-auto h-3.5 w-3.5 shrink-0 text-white/20 transition-colors group-hover:text-[#F5B800]/60" />
+                                            </Link>
+                                        ))}
                                     </div>
                                 </div>
                             </div>

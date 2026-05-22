@@ -1,26 +1,18 @@
-import { Facebook, Instagram, Twitter, MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react';import { Link } from '@inertiajs/react';
+import { Facebook, Instagram, Twitter, MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react';
+import { Link } from '@inertiajs/react';
+
+type FooterLink = { label: string; href: string };
 
 type Props = {
     nama?: string;
+    logo?: string | null;
     facebook?: string | null;
     instagram?: string | null;
     twitter?: string | null;
+    layanan?: FooterLink[];
+    pelatihan?: FooterLink[];
 };
 
-const SERVICES = [
-    { label: 'Security Guard', href: '/layanan' },
-    { label: 'Security Escort', href: '/layanan' },
-    { label: 'Security Event', href: '/layanan' },
-    { label: 'Pengamanan Perbankan', href: '/layanan' },
-    { label: 'Pengawalan VIP', href: '/layanan' },
-];
-const TRAINING = [
-    { label: 'Gada Pratama', href: '/pelatihan' },
-    { label: 'Gada Madya', href: '/pelatihan' },
-    { label: 'Gada Utama', href: '/pelatihan' },
-    { label: 'Penjinakan Bom', href: '/pelatihan' },
-    { label: 'Pengawalan VIP', href: '/pelatihan' },
-];
 const COMPANY = [
     { label: 'Tentang Kami', href: '/#tentang' },
     { label: 'Mitra', href: '/mitra' },
@@ -29,7 +21,17 @@ const COMPANY = [
     { label: 'Kontak', href: '/kontak' },
 ];
 
-export default function Footer({ nama, facebook, instagram, twitter }: Props) {
+export default function Footer({ nama, logo, facebook, instagram, twitter, layanan, pelatihan }: Props) {
+    const layananLinks = layanan && layanan.length > 0 ? layanan : [
+        { label: 'Security Guard', href: '/layanan' },
+        { label: 'Security Escort', href: '/layanan' },
+        { label: 'Security Event', href: '/layanan' },
+    ];
+    const pelatihanLinks = pelatihan && pelatihan.length > 0 ? pelatihan : [
+        { label: 'Gada Pratama', href: '/pelatihan' },
+        { label: 'Gada Madya', href: '/pelatihan' },
+        { label: 'Gada Utama', href: '/pelatihan' },
+    ];
 
     return (
         <footer className="relative bg-[#0E0E0F] overflow-hidden">
@@ -39,7 +41,7 @@ export default function Footer({ nama, facebook, instagram, twitter }: Props) {
                 <img
                     src="https://picsum.photos/1920/1080?grayscale&random=20"
                     alt=""
-                    className="h-full w-full object-cover object-center"
+                    loading="lazy" decoding="async" className="h-full w-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-[#0E0E0F]/85" />
                 <div className="absolute inset-0 bg-linear-to-t from-[#0E0E0F] via-[#0E0E0F]/60 to-[#0E0E0F]/80" />
@@ -55,7 +57,7 @@ export default function Footer({ nama, facebook, instagram, twitter }: Props) {
                     {/* ── Brand ── */}
                     <div className="lg:col-span-4">
                         <div className="flex items-center gap-3">
-                            <img src="/assets/logo.png" alt="Tribuana Security" className="h-10 w-auto" />
+                            <img src={logo || "/assets/logo.png"} alt="Tribuana Security" className="h-10 w-auto" />
                             <div className="flex flex-col leading-none">
                                 <span className="text-base font-black tracking-[0.15em] text-white uppercase">
                                     {nama || 'Tribuana'}
@@ -111,8 +113,8 @@ export default function Footer({ nama, facebook, instagram, twitter }: Props) {
 
                     {/* ── Links ── */}
                     <div className="grid gap-8 grid-cols-2 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-3">
-                        <FooterCol title="Layanan" items={SERVICES} />
-                        <FooterCol title="Pelatihan" items={TRAINING} />
+                        <FooterCol title="Layanan" items={layananLinks} />
+                        <FooterCol title="Pelatihan" items={pelatihanLinks} />
                         <FooterCol title="Perusahaan" items={COMPANY} />
                     </div>
                 </div>

@@ -20,7 +20,11 @@ class LandingController extends Controller
     /** Shared profil data untuk semua halaman */
     private function profil()
     {
-        return ProfilPerusahaan::getProfil();
+        $profil = ProfilPerusahaan::getProfil();
+        if ($profil && $profil->logo) {
+            $profil->logo_url = asset('storage/' . $profil->logo);
+        }
+        return $profil;
     }
 
     /** Home — ringkas: hero + about + layanan preview + testimoni + CTA */
@@ -28,9 +32,15 @@ class LandingController extends Controller
     {
         return Inertia::render('welcome', [
             'profil'    => $this->profil(),
-            'layanan'   => Layanan::ordered()->take(3)->get(),
+            'layanan'   => Layanan::ordered()->take(3)->get()->map(function ($item) {
+                $item->gambar_url = $item->gambar ? asset('storage/' . $item->gambar) : null;
+                return $item;
+            }),
             'testimoni' => Testimoni::active()->take(3)->get(),
-            'mitra'     => Mitra::orderByDesc('tahun')->take(8)->get(),
+            'mitra'     => Mitra::orderByDesc('tahun')->take(8)->get()->map(function ($item) {
+                $item->logo_url = $item->logo ? asset('storage/' . $item->logo) : null;
+                return $item;
+            }),
         ]);
     }
 
@@ -39,7 +49,10 @@ class LandingController extends Controller
     {
         return Inertia::render('layanan', [
             'profil'  => $this->profil(),
-            'layanan' => Layanan::ordered()->get(),
+            'layanan' => Layanan::ordered()->get()->map(function ($item) {
+                $item->gambar_url = $item->gambar ? asset('storage/' . $item->gambar) : null;
+                return $item;
+            }),
         ]);
     }
 
@@ -57,7 +70,10 @@ class LandingController extends Controller
     {
         return Inertia::render('mitra', [
             'profil' => $this->profil(),
-            'mitra'  => Mitra::orderByDesc('tahun')->get(),
+            'mitra'  => Mitra::orderByDesc('tahun')->paginate(20)->through(function ($item) {
+                $item->logo_url = $item->logo ? asset('storage/' . $item->logo) : null;
+                return $item;
+            }),
         ]);
     }
 
@@ -72,24 +88,20 @@ class LandingController extends Controller
 
     /** Halaman Berita */
     public function berita()
-{
-    // Kita harus "bungkus" datanya supaya nama file jadi URL Gambar lengkap
-    $berita = Berita::published()
-        ->orderByDesc('tanggal_publish')
-        ->get()
-        ->map(function ($item) {
-            // Ini bagian paling penting:
-            $item->gambar_url = $item->gambar 
-                ? asset('storage/' . $item->gambar) 
-                : null;
-            return $item;
-        });
+    {
+        $berita = Berita::published()
+            ->orderByDesc('tanggal_publish')
+            ->paginate(9)
+            ->through(function ($item) {
+                $item->gambar_url = $item->gambar ? asset('storage/' . $item->gambar) : null;
+                return $item;
+            });
 
-    return Inertia::render('berita', [
-        'profil' => $this->profil(),
-        'berita' => $berita, // Kirim variabel yang sudah di-map tadi
-    ]);
-}
+        return Inertia::render('berita', [
+            'profil' => $this->profil(),
+            'berita' => $berita,
+        ]);
+    }
     /** Halaman Berita Detail */
     public function showBerita($slug)
     {
@@ -117,10 +129,15 @@ class LandingController extends Controller
     public function showLayanan($slug)
     {
         $layananItem = Layanan::where('slug', $slug)->firstOrFail();
+        $layananItem->gambar_url = $layananItem->gambar ? asset('storage/' . $layananItem->gambar) : null;
 
         $layananLainnya = Layanan::where('id', '!=', $layananItem->id)
             ->ordered()
-            ->get();
+            ->get()
+            ->map(function ($item) {
+                $item->gambar_url = $item->gambar ? asset('storage/' . $item->gambar) : null;
+                return $item;
+            });
 
         return Inertia::render('layanan-detail', [
             'profil'         => $this->profil(),
@@ -156,6 +173,15 @@ class LandingController extends Controller
     {
         return Inertia::render('kontak', [
             'profil' => $this->profil(),
+        ]);
+    }
+
+    /** Halaman Karir */
+    public function karir()
+    {
+        return Inertia::render('karir', [
+            'profil' => $this->profil(),
+            'karir'  => Karir::buka()->orderByDesc('created_at')->get(),
         ]);
     }
 }

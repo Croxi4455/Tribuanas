@@ -11,7 +11,7 @@ const NAV_LINKS = [
     { label: 'Kontak', href: '/kontak' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ logo }: { logo?: string | null }) {
     const { url } = usePage();
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -66,7 +66,7 @@ export default function Navbar() {
                     {/* ── Logo ── */}
                     <Link href="/" className="group flex items-center gap-3">
                         <img
-                            src="/assets/logo.png"
+                            src={logo || "/assets/logo.png"}
                             alt="Tribuana Security"
                             className="h-10 w-auto transition-all duration-300 group-hover:opacity-90 group-hover:scale-105"
                         />
@@ -161,7 +161,7 @@ export default function Navbar() {
                     {/* Drawer header */}
                     <div className="flex items-center justify-between border-b border-white/5 px-6 py-5">
                         <div className="flex items-center gap-2.5">
-                            <img src="/assets/logo.png" alt="Tribuana Security" className="h-8 w-auto" />
+                            <img src={logo || "/assets/logo.png"} alt="Tribuana Security" className="h-8 w-auto" />
                             <div className="flex flex-col leading-none">
                                 <span className="text-sm font-black tracking-widest text-white uppercase">Tribuana</span>
                                 <span className="text-[8px] tracking-[0.3em] text-[#F5B800]/50 uppercase">Security</span>

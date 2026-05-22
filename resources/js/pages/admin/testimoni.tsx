@@ -1,119 +1,60 @@
-import { Head } from '@inertiajs/react';
-import { Plus, Star } from 'lucide-react';
+import { stripHtml } from "@/lib/utils";
+import { Head, Link, router } from '@inertiajs/react';
+import { Plus, Edit3, Trash2, Star } from 'lucide-react';
+import { useState } from 'react';
+import DeleteModal from '@/components/ui/delete-modal';
 
-type Testimoni = {
-    id: number;
-    nama: string;
-    jabatan: string;
-    perusahaan: string;
-    foto: string | null;
-    isi: string;
-    rating: number;
-    is_active: boolean;
-};
+type Testimoni = { id: number; nama: string; jabatan: string; perusahaan: string; foto: string | null; foto_url: string | null; isi: string; rating: number; is_active: boolean };
 
-type Props = {
-    testimoni: Testimoni[];
-};
-
-function RatingStars({ rating }: { rating: number }) {
-    return (
-        <div className="flex items-center gap-0.5">
-            {Array.from({ length: 5 }, (_, i) => (
-                <Star
-                    key={i}
-                    className={`h-3.5 w-3.5 ${
-                        i < rating
-                            ? 'fill-amber-400 text-amber-400'
-                            : 'fill-muted text-muted'
-                    }`}
-                />
-            ))}
-        </div>
-    );
-}
-
-export default function TestimoniIndex({ testimoni }: Props) {
+export default function TestimoniIndex({ testimoni = [] }: { testimoni: Testimoni[] }) {
+    const [deleteUrl, setDeleteUrl] = useState('');
     return (
         <>
             <Head title="Manajemen Testimoni" />
-            <div className="flex h-full flex-1 flex-col gap-6 p-4 md:p-6">
-                {/* Header */}
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex h-full flex-1 flex-col gap-6 p-6 md:p-8">
+                <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-2xl font-bold tracking-tight">Manajemen Testimoni</h1>
-                        <p className="text-muted-foreground">
-                            Kelola testimoni dari klien dan mitra perusahaan
-                        </p>
+                        <h1 className="text-2xl font-black tracking-tight text-white uppercase">Testimoni</h1>
+                        <p className="text-sm text-white/40">Kelola testimoni klien</p>
                     </div>
-                    <button
-                        className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground opacity-50 cursor-not-allowed"
-                        disabled
-                    >
-                        <Plus className="h-4 w-4" />
-                        Tambah Testimoni
-                    </button>
+                    <Link href="/admin/testimoni/create" className="flex items-center gap-2 rounded-lg bg-[#F5B800] px-5 py-2.5 text-xs font-black tracking-widest text-[#111] uppercase shadow-lg shadow-[#F5B800]/20 transition-all hover:shadow-xl active:scale-95">
+                        <Plus className="h-4 w-4" /> Tambah
+                    </Link>
                 </div>
 
-                {/* Table */}
-                <div className="overflow-hidden rounded-xl border border-sidebar-border/70 bg-card dark:border-sidebar-border">
-                    <div className="overflow-x-auto">
-                        <table className="w-full">
-                            <thead>
-                                <tr className="border-b border-sidebar-border/70 bg-muted/50 dark:border-sidebar-border">
-                                    <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">No</th>
-                                    <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">Nama</th>
-                                    <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">Perusahaan</th>
-                                    <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">Rating</th>
-                                    <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">Status</th>
-                                    <th className="px-5 py-3 text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-sidebar-border/70 dark:divide-sidebar-border">
-                                {testimoni.map((item, index) => (
-                                    <tr key={item.id} className="transition-colors hover:bg-muted/30">
-                                        <td className="whitespace-nowrap px-5 py-3.5 text-sm text-muted-foreground">{index + 1}</td>
-                                        <td className="px-5 py-3.5">
-                                            <div>
-                                                <p className="text-sm font-medium">{item.nama}</p>
-                                                <p className="text-xs text-muted-foreground">{item.jabatan}</p>
-                                            </div>
-                                        </td>
-                                        <td className="whitespace-nowrap px-5 py-3.5 text-sm">{item.perusahaan}</td>
-                                        <td className="whitespace-nowrap px-5 py-3.5">
-                                            <RatingStars rating={item.rating} />
-                                        </td>
-                                        <td className="whitespace-nowrap px-5 py-3.5">
-                                            <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                                                item.is_active
-                                                    ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
-                                                    : 'bg-red-500/10 text-red-600 dark:text-red-400'
-                                            }`}>
-                                                {item.is_active ? 'Aktif' : 'Nonaktif'}
-                                            </span>
-                                        </td>
-                                        <td className="whitespace-nowrap px-5 py-3.5 text-right">
-                                            <div className="flex items-center justify-end gap-1">
-                                                <button className="rounded-md px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">Edit</button>
-                                                <button className="rounded-md px-2.5 py-1.5 text-xs font-medium text-red-600 transition-colors hover:bg-red-500/10 dark:text-red-400">Hapus</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {testimoni.map((item) => (
+                        <div key={item.id} className="overflow-hidden rounded-xl border border-white/6 bg-white/3 p-6">
+                            <div className="mb-4 flex items-center gap-3">
+                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F5B800]/10 text-sm font-black text-[#F5B800]">
+                                    {item.nama.charAt(0)}
+                                </div>
+                                <div className="min-w-0">
+                                    <p className="truncate text-sm font-bold text-white">{item.nama}</p>
+                                    <p className="truncate text-xs text-white/35">{item.jabatan}, {item.perusahaan}</p>
+                                </div>
+                            </div>
+                            <div className="mb-3 flex gap-0.5">
+                                {Array.from({ length: 5 }, (_, i) => <Star key={i} className={`h-3.5 w-3.5 ${i < item.rating ? 'fill-[#F5B800] text-[#F5B800]' : 'text-white/10'}`} />)}
+                            </div>
+                            <p className="mb-4 text-sm text-white/40 line-clamp-3 italic">"{stripHtml(item.isi)}"</p>
+                            <div className="flex items-center justify-between">
+                                <span className={`rounded px-2 py-0.5 text-[10px] font-bold uppercase ${item.is_active ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-white/5 text-white/30 border border-white/6'}`}>
+                                    {item.is_active ? 'Aktif' : 'Nonaktif'}
+                                </span>
+                                <div className="flex gap-2">
+                                    <Link href={`/admin/testimoni/${item.id}/edit`} className="rounded-lg bg-white/5 p-2 text-blue-400 hover:bg-blue-500 hover:text-white"><Edit3 className="h-3.5 w-3.5" /></Link>
+                                    <button onClick={() => setDeleteUrl(`/admin/testimoni/${item.id}`)} className="rounded-lg bg-white/5 p-2 text-red-400 hover:bg-red-500 hover:text-white"><Trash2 className="h-3.5 w-3.5" /></button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                    {testimoni.length === 0 && <div className="col-span-full py-12 text-center text-white/25">Belum ada testimoni</div>}
                 </div>
-
-                <p className="text-xs text-muted-foreground">Total: {testimoni.length} testimoni</p>
             </div>
+            <DeleteModal show={!!deleteUrl} onClose={() => setDeleteUrl('')} url={deleteUrl} title="Hapus Testimoni" />
         </>
     );
 }
 
-TestimoniIndex.layout = {
-    breadcrumbs: [
-        { title: 'Admin', href: '/admin/dashboard' },
-        { title: 'Testimoni', href: '/admin/testimoni' },
-    ],
-};
+TestimoniIndex.layout = { breadcrumbs: [{ title: 'Admin', href: '/admin/dashboard' }, { title: 'Testimoni', href: '/admin/testimoni' }] };

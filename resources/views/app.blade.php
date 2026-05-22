@@ -30,12 +30,16 @@
             }
         </style>
 
-        <link rel="icon" href="/assets/logo.png" sizes="any">
-        <link rel="icon" href="/assets/logo.png" type="image/svg+xml">
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        @php $logoUrl = \App\Models\ProfilPerusahaan::first()?->logo ? asset('storage/' . \App\Models\ProfilPerusahaan::first()->logo) : '/assets/logo.png'; @endphp
+        <link rel="icon" href="{{ $logoUrl }}" sizes="any">
+        <link rel="icon" href="{{ $logoUrl }}" type="image/png">
+        <link rel="apple-touch-icon" href="{{ $logoUrl }}">
 
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+        {{-- Preconnect untuk font dan CDN --}}
+        <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+        <link rel="dns-prefetch" href="https://picsum.photos">
+
+        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600&display=swap" rel="stylesheet" />
 
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])

@@ -196,7 +196,7 @@ export default function TestimonialsSection({ testimoni }: Props) {
                     ref={quoteImgRef}
                     src="https://picsum.photos/1920/500?grayscale&random=55"
                     alt=""
-                    className="h-full w-full object-cover object-center will-change-transform"
+                    loading="lazy" decoding="async" className="h-full w-full object-cover object-center will-change-transform"
                     style={{ transform: 'scale(1.3)', transformOrigin: 'center center' }}
                 />
                 {/* Overlays */}

@@ -142,8 +142,9 @@
     }
 }
 
-/* ── Admin Panel: Dark + Gold Theme (sesuai logo) ── */
+/* ── Admin Panel: Always Dark + Gold Theme ── */
 .admin-theme {
+    color-scheme: dark;
     --background: #181819;
     --foreground: rgba(255,255,255,0.85);
     --card: #1C1C1E;
@@ -194,4 +195,53 @@ html {
 .marquee-row {
     overflow: hidden;
     white-space: nowrap;
+}
+
+/* ── TipTap Editor ── */
+.tiptap p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+    height: 0;
+}
+
+.tiptap ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.tiptap ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+}
+
+.tiptap ul li,
+.tiptap ol li {
+    margin-bottom: 0.25rem;
+}
+
+.tiptap blockquote {
+    border-left: 3px solid rgba(245, 184, 0, 0.3);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+}
+
+.tiptap h1, .tiptap h2, .tiptap h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.tiptap hr {
+    border-color: rgba(255, 255, 255, 0.1);
+    margin: 1rem 0;
+}
+
+.scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
 }

@@ -16,7 +16,7 @@ class Layanan extends Model
         'nama',
         'slug',
         'deskripsi',
-        'icon',
+        'gambar',
         'urutan',
     ];
 

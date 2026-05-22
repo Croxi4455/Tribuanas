@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import {
     Briefcase,
     Building2,
@@ -42,6 +42,8 @@ const footerNavItems: NavItem[] = [
 ];
 
 export function AppSidebar() {
+    const { appLogo } = usePage().props as any;
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader className="border-b border-[#F5B800]/10 pb-4">
@@ -49,7 +51,7 @@ export function AppSidebar() {
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
                             <Link href="/admin/dashboard" prefetch>
-                                <img src="/assets/logo.png" alt="Tribuana Security" className="h-8 w-auto" />
+                                <img src={appLogo || '/assets/logo.png'} alt="Tribuana Security" className="h-8 w-auto" />
                                 <div className="flex flex-col leading-none">
                                     <span className="text-sm font-black tracking-[0.12em] text-white uppercase">Tribuana</span>
                                     <span className="text-[9px] font-medium tracking-[0.3em] text-[#F5B800]/60 uppercase">Admin Panel</span>

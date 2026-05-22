@@ -100,7 +100,7 @@ export default function PelatihanDetailPage({ profil, pelatihan, pelatihanLainny
 
                                 {/* Deskripsi */}
                                 <div className="mb-8 rounded-2xl border border-white/5 bg-white/3 p-8">
-                                    <p className="text-base leading-relaxed text-white/65">{pelatihan.deskripsi}</p>
+                                    <div className="prose prose-invert prose-sm max-w-none prose-headings:text-white prose-headings:font-black prose-p:text-white/65 prose-p:leading-relaxed prose-a:text-[#F5B800] prose-strong:text-white prose-li:text-white/65" dangerouslySetInnerHTML={{ __html: pelatihan.deskripsi }} />
                                 </div>
 
                                 {/* Materi */}

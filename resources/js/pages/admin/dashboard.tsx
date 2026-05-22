@@ -149,7 +149,7 @@ export default function AdminDashboard({ stats, berita_terbaru, kontak_terbaru }
                         </div>
                         <div className="divide-y divide-white/5">
                             {berita_terbaru.map((item) => (
-                                <div key={item.id} className="flex items-center justify-between px-6 py-4 transition-colors hover:bg-white/2">
+                                <div key={item.id} className="flex items-center justify-between px-6 py-4 transition-colors hover:bg-white/5">
                                     <div className="min-w-0 flex-1">
                                         <p className="truncate text-sm font-semibold text-white/80">{item.judul}</p>
                                         <p className="mt-0.5 text-xs text-white/35">
@@ -182,7 +182,7 @@ export default function AdminDashboard({ stats, berita_terbaru, kontak_terbaru }
                         </div>
                         <div className="divide-y divide-white/5">
                             {kontak_terbaru.map((item) => (
-                                <div key={item.id} className="flex items-center justify-between px-6 py-4 transition-colors hover:bg-white/2">
+                                <div key={item.id} className="flex items-center justify-between px-6 py-4 transition-colors hover:bg-white/5">
                                     <div className="flex min-w-0 flex-1 items-center gap-3">
                                         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-xs font-black text-white/50">
                                             {item.nama.charAt(0)}
