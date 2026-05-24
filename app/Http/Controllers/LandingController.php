@@ -184,4 +184,22 @@ class LandingController extends Controller
             'karir'  => Karir::buka()->orderByDesc('created_at')->get(),
         ]);
     }
+
+    /** Halaman Karir Detail */
+    public function showKarir($id)
+    {
+        $karirItem = Karir::findOrFail($id);
+
+        $karirLainnya = Karir::buka()
+            ->where('id', '!=', $karirItem->id)
+            ->orderByDesc('created_at')
+            ->take(3)
+            ->get();
+
+        return Inertia::render('karir-detail', [
+            'profil'       => $this->profil(),
+            'karir'        => $karirItem,
+            'karirLainnya' => $karirLainnya,
+        ]);
+    }
 }

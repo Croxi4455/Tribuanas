@@ -18,7 +18,8 @@ const PUBLIC_PAGES = new Set([
     'berita', 'berita-detail',
     'layanan', 'layanan-detail',
     'pelatihan', 'pelatihan-detail',
-    'mitra', 'galeri', 'kontak', 'karir',
+    'mitra', 'galeri', 'kontak',
+    'karir', 'karir-detail',
 ]);
 
 // Flash toast — register globally, client-only, no React hooks

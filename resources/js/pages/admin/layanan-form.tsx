@@ -12,7 +12,7 @@ export default function LayananForm({ layanan }: Props) {
         deskripsi: layanan?.deskripsi || '',
         urutan: layanan?.urutan || 0,
         gambar: null as File | null,
-        _method: isEdit ? 'PUT' : 'POST',
+        
     });
 
     const submit = (e: React.FormEvent) => {

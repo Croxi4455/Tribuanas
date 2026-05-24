@@ -8,6 +8,7 @@ const NAV_LINKS = [
     { label: 'Pelatihan', href: '/pelatihan' },
     { label: 'Mitra', href: '/mitra' },
     { label: 'Berita', href: '/berita' },
+    { label: 'Karir', href: '/karir' },
     { label: 'Kontak', href: '/kontak' },
 ];
 

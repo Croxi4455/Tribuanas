@@ -13,7 +13,7 @@ export default function BeritaForm({ berita }: Props) {
         tanggal_publish: berita?.tanggal_publish?.split('T')[0] || new Date().toISOString().split('T')[0],
         is_published: berita?.is_published ?? true,
         gambar: null as File | null,
-        _method: isEdit ? 'PUT' : 'POST',
+        
     });
 
     const submit = (e: React.FormEvent) => {

@@ -30,6 +30,7 @@ Route::get('/mitra', [LandingController::class, 'mitra'])->name('mitra');
 Route::get('/galeri', [LandingController::class, 'galeri'])->name('galeri');
 Route::get('/kontak', [LandingController::class, 'kontak'])->name('kontak');
 Route::get('/karir', [LandingController::class, 'karir'])->name('karir.index');
+Route::get('/karir/{id}', [LandingController::class, 'showKarir'])->name('karir.show');
 
 // Form kontak publik (kirim pesan)
 Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');

@@ -45,7 +45,11 @@ export default function KarirPage({ profil, karir }: Props) {
                         ) : (
                             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                                 {karir.map((item) => (
-                                    <div key={item.id} className="group overflow-hidden rounded-2xl border border-white/5 bg-white/3 p-7 transition-all hover:border-[#F5B800]/20">
+                                    <Link
+                                        key={item.id}
+                                        href={`/karir/${item.id}`}
+                                        className="group block overflow-hidden rounded-2xl border border-white/5 bg-white/3 p-7 transition-all hover:border-[#F5B800]/20 hover:-translate-y-1"
+                                    >
                                         <div className="mb-4 flex items-start justify-between">
                                             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#F5B800]/10">
                                                 <Briefcase className="h-5 w-5 text-[#F5B800]" />
@@ -59,7 +63,7 @@ export default function KarirPage({ profil, karir }: Props) {
                                             </span>
                                         </div>
 
-                                        <h3 className="mb-3 text-lg font-black text-white">{item.posisi}</h3>
+                                        <h3 className="mb-3 text-lg font-black text-white group-hover:text-[#F5B800] transition-colors">{item.posisi}</h3>
 
                                         <div className="mb-4 flex flex-wrap gap-3 text-xs text-white/40">
                                             <span className="flex items-center gap-1"><MapPin className="h-3 w-3 text-[#F5B800]/50" />{item.lokasi}</span>
@@ -68,15 +72,10 @@ export default function KarirPage({ profil, karir }: Props) {
 
                                         <div className="mb-5 text-sm text-white/45 line-clamp-3" dangerouslySetInnerHTML={{ __html: item.deskripsi }} />
 
-                                        {!isExpired(item.batas_daftar) && (
-                                            <Link
-                                                href="/kontak"
-                                                className="flex items-center justify-center gap-2 rounded-lg border border-[#F5B800]/30 py-2.5 text-xs font-bold tracking-widest text-[#F5B800] uppercase transition-all hover:bg-[#F5B800]/10"
-                                            >
-                                                Lamar Sekarang
-                                            </Link>
-                                        )}
-                                    </div>
+                                        <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-[#F5B800]/60 uppercase group-hover:text-[#F5B800]">
+                                            Lihat Detail →
+                                        </div>
+                                    </Link>
                                 ))}
                             </div>
                         )}

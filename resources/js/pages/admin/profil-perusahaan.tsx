@@ -127,7 +127,7 @@ function ProfilForm({ profil, onCancel }: { profil: any; onCancel: () => void })
         instagram: profil?.instagram || '',
         twitter: profil?.twitter || '',
         logo: null as File | null,
-        _method: 'PUT',
+        
     });
 
     const submit = (e: React.FormEvent) => {
