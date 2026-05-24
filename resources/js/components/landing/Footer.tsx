@@ -17,6 +17,7 @@ const COMPANY = [
     { label: 'Tentang Kami', href: '/#tentang' },
     { label: 'Mitra', href: '/mitra' },
     { label: 'Berita', href: '/berita' },
+    { label: 'Karir', href: '/karir' },
     { label: 'Galeri', href: '/galeri' },
     { label: 'Kontak', href: '/kontak' },
 ];

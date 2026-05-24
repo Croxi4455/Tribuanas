@@ -14,7 +14,7 @@ export default function PelatihanForm({ pelatihan }: Props) {
         durasi: pelatihan?.durasi || '',
         is_active: pelatihan?.is_active ?? true,
         gambar: null as File | null,
-        _method: isEdit ? 'PUT' : 'POST',
+        
     });
 
     const submit = (e: React.FormEvent) => {

@@ -14,7 +14,7 @@ export default function KarirForm({ karir }: Props) {
         lokasi: karir?.lokasi || '',
         status: karir?.status || 'buka',
         batas_daftar: karir?.batas_daftar?.split('T')[0] || '',
-        _method: isEdit ? 'PUT' : 'POST',
+        
     });
 
     const submit = (e: React.FormEvent) => {

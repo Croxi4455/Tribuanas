@@ -14,7 +14,7 @@ export default function TestimoniForm({ testimoni }: Props) {
         rating: testimoni?.rating || 5,
         is_active: testimoni?.is_active ?? true,
         foto: null as File | null,
-        _method: isEdit ? 'PUT' : 'POST',
+        
     });
 
     const submit = (e: React.FormEvent) => {
