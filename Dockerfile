@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y \
 # Aktifkan mod_rewrite Apache untuk Laravel routing
 RUN a2enmod rewrite
 
+# FIX ERROR APACHE: Matikan mpm_event agar tidak bentrok dengan mpm_prefork bawaan PHP-Apache
+RUN a2dismod mpm_event
+
 # Ubah Document Root Apache ke folder public Laravel
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
